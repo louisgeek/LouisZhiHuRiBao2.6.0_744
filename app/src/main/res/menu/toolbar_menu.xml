@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+<item android:id="@+id/id_item01" android:title="消息"   android:icon="@mipmap/ic_launcher" app:showAsAction="ifRoom">
+</item>
+    <item android:id="@+id/id_item02" android:title="夜间模式" app:showAsAction="never">
+    </item>
+    <item android:id="@+id/id_item03" android:title="设置选项" app:showAsAction="never">
+    </item>
+</menu>

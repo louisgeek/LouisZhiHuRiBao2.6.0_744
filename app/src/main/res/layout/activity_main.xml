@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.louisgeek.louiszhihuribao260_744.MainActivity">
+    <!-- 必须是android:layout_width="match_parent"
+    android:layout_height="match_parent" 不然报错 -->
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/id_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--主布局-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--?attr/colorPrimary-->
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/id_tb_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/ToolbarTheme"
+                android:background="?attr/colorPrimary"
+                >
+                <!--自定义控件-->
+                <TextView
+                    android:id="@+id/id_tv_4bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="自定义"/>
+            </android.support.v7.widget.Toolbar>
+
+            <LinearLayout
+                android:id="@+id/id_ll_top_indicatorGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/id_ll_top_indicatorGroup_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="5dp" />
+            </LinearLayout>
+
+            <ExpandableListView
+                android:id="@+id/id_elv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <!--侧滑菜单布局   也可以自定义实现这部分Drawer-->
+        <android.support.design.widget.NavigationView
+            android:id="@+id/id_nv"
+            android:layout_width="360dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/drawer_header"
+            app:menu="@menu/drawer_menu"
+            />
+
+    </android.support.v4.widget.DrawerLayout>
+
+</RelativeLayout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--android:checkable="true"也影响着item的选中状态（选中有背景）-->
+    <!-- android:checkableBehavior="all"-->
+    <group>
+        <item
+            android:id="@+id/mg"
+            android:checkable="true"
+            android:icon="@android:drawable/ic_media_play"
+            android:title="首页"/>
+
+        <item
+            android:id="@+id/xl"
+            android:checkable="true"
+            android:icon="@android:drawable/ic_media_play"
+            android:title="日常心理学"/>
+
+       <!-- <item
+            android:id="@+id/xj"
+            android:checkable="true"
+            android:icon="@android:drawable/ic_media_play"
+            android:title="香蕉"/>-->
+        <!--分组的头部只能为文字,设置icon无效-->
+<!--
+        <item
+            android:id="@+id/xg"
+            android:icon="@android:drawable/ic_media_ff"
+            android:title="西瓜">
+            <menu>
+                <item
+                    android:id="@+id/hxg"
+                    android:icon="@android:drawable/ic_media_play"
+                    android:checkable="true"
+                    android:title="黄西瓜"/>
+
+                <item
+                    android:id="@+id/redxg"
+                    android:icon="@android:drawable/ic_media_play"
+                    android:checkable="true"
+                    android:title="红西瓜"/>
+            </menu>
+        </item>
+
+        <item
+            android:id="@+id/fl"
+            android:title="凤梨"
+            >
+            <menu>
+                <item
+                    android:id="@+id/twfl"
+                    android:icon="@android:drawable/ic_media_play"
+                    android:checkable="true"
+                    android:title="台湾凤梨"/>
+
+                <item
+                    android:id="@+id/hnfl"
+                    android:icon="@android:drawable/ic_media_play"
+                    android:checkable="true"
+                    android:title="海南凤梨"/>
+            </menu>
+        </item>
+-->
+
+
+    </group>
+</menu>

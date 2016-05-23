@@ -1,0 +1,44 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+      <!--不用这种方式  &lt;!&ndash;这两句隐藏actionBar   也可以吧parent="xxx"改成parent="xxx.NoActionBar" &ndash;&gt;
+        <item name="windowActionBar">false</item>
+        &lt;!&ndash; 旧版本是 android:windowNoTitle&ndash;&gt;
+        <item name="windowNoTitle">true</item> -->
+    </style>
+
+    <!--bar 菜单背景 白色-->
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Light">
+        <!--状态栏颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--Actionbar 的背景色设定在 style 中的 colorPrimary-->
+      <!--  <item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--Toolbar 的背景色在layout文件中设置background属性。-->
+
+        <!--标题与更多菜单中的文字颜色-->
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <!--可以控制更多菜单中的文字颜色  把textColorPrimary改变掉的颜色再改掉！！-->
+         <item name="android:textColor">@android:color/black</item>
+
+
+        <!--各控制元件的预设颜色-->
+        <item name="colorControlNormal">@android:color/white</item>
+
+        <!--各控制元件(如：check box、switch 或是 radoi) 被勾选 (checked) 或是选定 (selected) 的颜色-->
+       <!-- <item name="colorAccent">@color/colorAccent</item>-->
+
+        <!--App 的背景色-->
+       <!-- <item name="android:windowBackground">@color/colorAccent</item>-->
+
+        <!--导航栏的背景色，但只能用在 API Level 21 (Android 5) 以上的版本-->
+       <!-- <item name="android:navigationBarColor">@color/colorAccent</item>-->
+        <item name="actionMenuTextColor">@color/colorAccent</item>
+        <item name="android:textSize">18dp</item> <!--  字体大小-->
+
+    </style>
+</resources>
