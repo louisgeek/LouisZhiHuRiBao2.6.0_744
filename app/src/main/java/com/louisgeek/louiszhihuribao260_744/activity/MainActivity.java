@@ -1,11 +1,16 @@
 package com.louisgeek.louiszhihuribao260_744.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +36,8 @@ import com.louisgeek.louiszhihuribao260_744.bean.ClassifyBean;
 import com.louisgeek.louiszhihuribao260_744.bean.NewsBean;
 import com.louisgeek.louiszhihuribao260_744.bean.NewsDateBean;
 import com.louisgeek.louiszhihuribao260_744.custom.LouisAppCompatActivity;
+import com.louisgeek.louiszhihuribao260_744.info.Constants;
+import com.louisgeek.louiszhihuribao260_744.tool.InfoHolderSingletonTool;
 import com.louisgeek.louiszhihuribao260_744.util.ThemeUtil;
 
 import java.util.ArrayList;
@@ -416,9 +423,9 @@ public class MainActivity extends LouisAppCompatActivity {
 
     @Override
     protected void onStop() {
+        super.onStop();
         // To prevent a memory leak on rotation, make sure to call stopAutoCycle() on the slider before activity or fragment is destroyed
         mSliderLayout.stopAutoCycle();
-        super.onStop();
     }
 
     @Override
@@ -429,9 +436,73 @@ public class MainActivity extends LouisAppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+       // setMenuBackgroundAndTextColor();
+
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
         // return super.onCreateOptionsMenu(menu);
+    }
+    /** 设置Menu的背景图 */
+    protected void setMenuBackgroundAndTextColor() {
+       LayoutInflater layoutInflater=getLayoutInflater();
+        layoutInflater.setFactory(new LayoutInflater.Factory()
+        {
+
+            @Override
+            public View onCreateView(String name, Context context,
+                                     AttributeSet attrs)
+            {
+                System.out.println(name);
+                if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")
+                        || name.equalsIgnoreCase("com.android.internal.view.menu.ActionMenuItemView"))
+                {
+                    try
+                    {
+                        LayoutInflater f = getLayoutInflater();
+                        final View view = f.createView(name, null, attrs);
+                        System.out.println((view instanceof TextView));
+                        if(view instanceof TextView){
+
+                            String nowThemeValue= InfoHolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
+                            if (nowThemeValue.equals(Constants.THEME_DEFAULT_THEMEFLAG)) {
+                                ((TextView)view).setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.items_menu_text_color));
+                            }else if (nowThemeValue.equals(Constants.THEME_BLACK_THEMEFLAG)) {
+                                ((TextView)view).setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.items_menu_text_color_black));
+                            }
+
+
+                        }else{
+                            new Handler().post(new Runnable() {
+                                public void run() {
+                                    String nowThemeValue= InfoHolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
+                                    if (nowThemeValue.equals(Constants.THEME_DEFAULT_THEMEFLAG)) {
+                                        //设置背景
+                                        view.setBackgroundResource(R.color.items_menu_bg_color);
+                                    }else if (nowThemeValue.equals(Constants.THEME_BLACK_THEMEFLAG)) {
+                                        //设置背景
+                                        view.setBackgroundResource(R.color.items_menu_bg_color_black);
+                                    }
+
+
+
+                                }
+                            });
+                        }
+                        return view;
+                    } catch (InflateException e)
+                    {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+                return null;
+            }
+
+        });
+
     }
 
 /*
