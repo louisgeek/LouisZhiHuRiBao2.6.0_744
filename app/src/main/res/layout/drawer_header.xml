@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:padding="30dp" android:background="@color/colorPrimary"
+    android:padding="30dp"
+    android:background="@color/left_header_bg_color"
+    android:tag="skin:left_header_bg_color:background"
     >
 
     <ImageView
@@ -17,6 +19,8 @@
         android:layout_height="wrap_content"
         android:textSize="24dp"
         android:text="xxx"
+        android:textColor="@color/left_header_text_color"
+        android:tag="skin:left_header_text_color:textColor"
         android:layout_marginTop="15dp"/>
 
 </LinearLayout>

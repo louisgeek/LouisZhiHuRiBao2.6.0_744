@@ -23,7 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:theme="@style/ToolbarTheme"
-                android:background="?attr/colorPrimary"
+                android:background="@color/toolbar_bg_color"
+                android:tag="skin:toolbar_bg_color:background"
                 >
                 <!--自定义控件-->
                 <TextView
@@ -70,7 +71,8 @@
             android:layout_width="320dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-android:background="@color/colorAccent"
+            android:background="@color/left_list_bg_color"
+            android:tag="skin:left_list_bg_color:background"
             android:choiceMode="singleChoice"
             />
 

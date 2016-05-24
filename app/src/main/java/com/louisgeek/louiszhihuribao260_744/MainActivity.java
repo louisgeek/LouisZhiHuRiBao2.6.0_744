@@ -3,7 +3,6 @@ package com.louisgeek.louiszhihuribao260_744;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
@@ -25,12 +23,13 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.zhy.changeskin.SkinManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends LouisAppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
@@ -48,11 +47,14 @@ public class MainActivity extends AppCompatActivity {
 
     List<ClassifyBean> classifyBeanList = new ArrayList<>();
 
+    private String DEFAULT_THEMEFLAG="";
+    private String BLACK_THEMEFLAG="black";
+    private String nowThemeFlag=DEFAULT_THEMEFLAG;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // requestWindowFeature(Window.FEATURE_NO_TITLE);//报错
-        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);//还要加上 <item name="android:windowActionBar">false</item>
+        //隐藏窗口写在了基类aty里 在这里报错
         setContentView(R.layout.activity_main);
 
         id_ll_top_indicatorGroup = (LinearLayout) findViewById(R.id.id_ll_top_indicatorGroup);
@@ -88,14 +90,16 @@ public class MainActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
 
                 switch (item.getItemId()) {
-                    case R.id.id_item01:
-                        Toast.makeText(MainActivity.this, "id_item01", Toast.LENGTH_SHORT).show();
+                    case R.id.id_item_message:
+                        Toast.makeText(MainActivity.this, "id_item_message", Toast.LENGTH_SHORT).show();
+
                         break;
-                    case R.id.id_item02:
-                        Toast.makeText(MainActivity.this, "id_item02", Toast.LENGTH_SHORT).show();
+                    case R.id.id_item_changeTheme:
+                        changeTheme();
+                        Toast.makeText(MainActivity.this, "id_item_changeTheme", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.id_item03:
-                        Toast.makeText(MainActivity.this, "id_item03", Toast.LENGTH_SHORT).show();
+                    case R.id.id_item_setting:
+                        Toast.makeText(MainActivity.this, "id_item_setting", Toast.LENGTH_SHORT).show();
                         break;
                 }
 
@@ -140,8 +144,20 @@ public class MainActivity extends AppCompatActivity {
 
         id_drawer_list.addHeaderView(drawer_header_view);
         MyBaseAdapter adapter = new MyBaseAdapter(this, classifyBeanList);
-
+        adapter.setOnDingYue(new MyBaseAdapter.OnDingYue() {
+            @Override
+            public boolean dingyue(int pos) {
+                Toast.makeText(MainActivity.this, "dingyue" + pos, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
         id_drawer_list.setAdapter(adapter);
+        id_drawer_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, "onItemClick" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, mIddrawer, idtbbar, R.string.drawer_open, R.string.drawer_close);
         abdt.syncState();
@@ -245,8 +261,12 @@ public class MainActivity extends AppCompatActivity {
                         // Log.d(TAG, "bind to new group,group position = " + groupPos);
                         NewsDate newsdate = (NewsDate) myBaseExpandableListAdapter.getGroup(groupPos);
                         if (newsdate != null) {
-                            TextView tv = (TextView) id_ll_top_indicatorGroup.getChildAt(0);
-                            tv.setText(newsdate.getDateStr());
+                            /*TextView tv = (TextView) id_ll_top_indicatorGroup.getChildAt(0);
+                            tv.setText(newsdate.getDateStr());*/
+
+                            //2016年5月24日09:10:36
+                            idtbbar.setTitle(newsdate.getDateStr());
+
                         }
 
 
@@ -262,7 +282,9 @@ public class MainActivity extends AppCompatActivity {
 
                         id_ll_top_indicatorGroup.setVisibility(View.GONE);
                     } else {
-                        id_ll_top_indicatorGroup.setVisibility(View.VISIBLE);
+                        id_ll_top_indicatorGroup.setVisibility(View.GONE);
+                        //###2016年5月24日09:11:08
+                        //###id_ll_top_indicatorGroup.setVisibility(View.VISIBLE);
                     }
 
                     if (indicatorGroupId == -1) // 如果此时group的id无效，则返回
@@ -310,6 +332,22 @@ public class MainActivity extends AppCompatActivity {
             classifyBean.setClassifyTitle("菜单" + i);
             classifyBean.setHasHolder(true);
             classifyBeanList.add(classifyBean);
+        }
+    }
+
+    /**
+     * SkinManager.getInstance().changeSkin(suffix);
+     * 多套皮肤以后缀就行区别，比如：main_bg，皮肤资源可以为：main_bg_red,main_bg_green等。
+
+     换肤时，直接传入后缀，例如上面描述的red,green。
+     */
+    private void changeTheme() {
+        if (nowThemeFlag.equals(DEFAULT_THEMEFLAG)){
+            SkinManager.getInstance().changeSkin(BLACK_THEMEFLAG);
+            nowThemeFlag=BLACK_THEMEFLAG;
+        }else if(nowThemeFlag.equals(BLACK_THEMEFLAG)){
+            SkinManager.getInstance().removeAnySkin();
+            nowThemeFlag=DEFAULT_THEMEFLAG;
         }
     }
 

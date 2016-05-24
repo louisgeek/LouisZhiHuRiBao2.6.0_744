@@ -3,6 +3,8 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:gravity="center_vertical"
+              android:background="@color/items_group_bg_color"
+              android:tag="skin:items_group_bg_color:background"
               android:layout_height="wrap_content">
     <TextView
         android:id="@+id/date"
@@ -10,5 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="group"
+        android:textColor="@color/items_group_text_color"
+        android:tag="skin:items_group_text_color:textColor"
         />
 </LinearLayout>

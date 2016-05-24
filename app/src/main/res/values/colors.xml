@@ -3,4 +3,34 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <!--默认风格-->
+    <color name="toolbar_bg_color">#4d9eab</color>
+    <color name="left_header_bg_color">#4d9eab</color>
+    <color name="left_list_bg_color">#fdfdfe</color>
+    <color name="items_group_bg_color">#fdfdfe</color>
+    <color name="items_child_bg_color">#fdfdfe</color>
+    <color name="items_child_cardview_bg_color">#c4c4c4</color>
+
+    <color name="left_header_text_color">#fdfdfe</color>
+    <color name="left_list_text_color">#000000</color>
+    <color name="items_group_text_color">#b4afaf</color>
+    <color name="items_child_text_color">#000000</color>
+
+    <!--黑色风格-->
+    <color name="toolbar_bg_color_black">#161818</color>
+    <color name="left_header_bg_color_black">#161818</color>
+    <color name="left_list_bg_color_black">#161818</color>
+    <color name="items_group_bg_color_black">#16191a</color>
+    <color name="items_child_bg_color_black">#16191a</color>
+    <color name="items_child_cardview_bg_color_black">#252424</color>
+
+
+    <color name="left_header_text_color_black">#b4afaf</color>
+    <color name="left_list_text_color_black">#b4afaf</color>
+    <color name="items_group_text_color_black">#b4afaf</color>
+    <color name="items_child_text_color_black">#fdfdfe</color>
+
+
 </resources>
