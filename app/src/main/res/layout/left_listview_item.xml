@@ -15,7 +15,7 @@
         android:id="@+id/id_iv_dy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
+        android:src="@android:drawable/ic_menu_info_details"
         android:layout_alignParentRight="true"
         />
 </RelativeLayout>
