@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private int indicatorGroupId = -1;
 
 
-    List<ClassifyBean> classifyBeanList=new ArrayList<>();
+    List<ClassifyBean> classifyBeanList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,10 +136,10 @@ public class MainActivity extends AppCompatActivity {
 
         ListView id_drawer_list = (ListView) findViewById(R.id.id_drawer_list);
 
-        View drawer_header_view=LayoutInflater.from(this).inflate(R.layout.drawer_header,null);
+        View drawer_header_view = LayoutInflater.from(this).inflate(R.layout.drawer_header, null);
 
         id_drawer_list.addHeaderView(drawer_header_view);
-MyBaseAdapter adapter=new MyBaseAdapter(this,classifyBeanList);
+        MyBaseAdapter adapter = new MyBaseAdapter(this, classifyBeanList);
 
         id_drawer_list.setAdapter(adapter);
 
@@ -216,11 +216,14 @@ MyBaseAdapter adapter=new MyBaseAdapter(this,classifyBeanList);
                  * calculate point (0,0)
                  */
                 int npos = view.pointToPosition(0, 0);// 其实就是firstVisibleItem
+                Log.d(TAG, "onScroll: npos" + npos);
                 if (npos != AdapterView.INVALID_POSITION) {// 如果第一个位置值不无效
-                long pos = expandableListView.getExpandableListPosition(npos);
+                    long pos = expandableListView.getExpandableListPosition(npos);
                     int childPos = ExpandableListView.getPackedPositionChild(pos);// 获取第一行child的id
                     int groupPos = ExpandableListView.getPackedPositionGroup(pos);// 获取第一行group的id
-                    if (childPos == AdapterView.INVALID_POSITION) {// 第一行不是显示child,就是group,此时没必要显示指示器
+                    //Log.d(TAG, "onScroll: childPos"+childPos);
+                    //Log.d(TAG, "onScroll: groupPos"+groupPos);
+                    if (childPos == AdapterView.INVALID_POSITION) {//
                         View groupView = expandableListView.getChildAt(npos
                                 - expandableListView.getFirstVisiblePosition());// 第一行的view
                         indicatorGroupHeight = groupView.getHeight();// 获取group的高度
@@ -229,17 +232,24 @@ MyBaseAdapter adapter=new MyBaseAdapter(this,classifyBeanList);
                     if (indicatorGroupHeight == 0) {
                         return;
                     }
+                    if (groupPos == AdapterView.INVALID_POSITION) {
+                        id_ll_top_indicatorGroup.setVisibility(View.GONE);
+                        return;
+                    }
                     // update the data of indicator group view
                     if (groupPos != indicatorGroupId) {// 如果指示器显示的不是当前group
                     /*myBaseExpandableListAdapter.getGroupView(groupPos, expandableListView.isGroupExpanded(groupPos),
                             id_ll_top_indicatorGroup.getChildAt(0), null);// 将指示器更新为当前group*/
+
                         indicatorGroupId = groupPos;
-                       // Log.d(TAG, "bind to new group,group position = " + groupPos);
+                        // Log.d(TAG, "bind to new group,group position = " + groupPos);
                         NewsDate newsdate = (NewsDate) myBaseExpandableListAdapter.getGroup(groupPos);
                         if (newsdate != null) {
                             TextView tv = (TextView) id_ll_top_indicatorGroup.getChildAt(0);
                             tv.setText(newsdate.getDateStr());
                         }
+
+
                         // mAdapter.hideGroup(indicatorGroupId); // we set this group view
                         // to be hided
                         // 为此指示器增加点击事件
@@ -255,13 +265,11 @@ MyBaseAdapter adapter=new MyBaseAdapter(this,classifyBeanList);
                         id_ll_top_indicatorGroup.setVisibility(View.VISIBLE);
                     }
 
-                    if (indicatorGroupId == -1) // 如果此时grop的id无效，则返回
+                    if (indicatorGroupId == -1) // 如果此时group的id无效，则返回
                     {
                         return;
                     }
-/**
- * calculate point (0,indicatorGroupHeight) 往上推出的效果
- */
+
                     int showHeight = calculateShowHeight();
 
                     // update group position
@@ -272,6 +280,9 @@ MyBaseAdapter adapter=new MyBaseAdapter(this,classifyBeanList);
                 }
             }
 
+            /**
+             * calculate point (0,indicatorGroupHeight) 往上推出的效果
+             */
             private int calculateShowHeight() {
                 int showHeight = indicatorGroupHeight;
                 int nEndPos = expandableListView.pointToPosition(0, indicatorGroupHeight);// 第二个item的位置
@@ -293,12 +304,10 @@ MyBaseAdapter adapter=new MyBaseAdapter(this,classifyBeanList);
 */
 
 
-
         //===============================
-
-        for (int i = 0; i <15 ; i++) {
-            ClassifyBean classifyBean=new ClassifyBean();
-            classifyBean.setClassifyTitle("菜单"+i);
+        for (int i = 0; i < 10; i++) {
+            ClassifyBean classifyBean = new ClassifyBean();
+            classifyBean.setClassifyTitle("菜单" + i);
             classifyBean.setHasHolder(true);
             classifyBeanList.add(classifyBean);
         }
@@ -349,7 +358,7 @@ MyBaseAdapter adapter=new MyBaseAdapter(this,classifyBeanList);
 
             @Override
             public void onPageSelected(int position) {
-                Log.d(TAG, "Page Changed: " + position);
+                //Log.d(TAG, "Page Changed: " + position);
             }
 
             @Override
