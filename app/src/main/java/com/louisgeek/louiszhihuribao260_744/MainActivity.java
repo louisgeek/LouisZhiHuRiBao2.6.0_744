@@ -1,5 +1,6 @@
 package com.louisgeek.louiszhihuribao260_744;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,7 +24,6 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
-import com.zhy.changeskin.SkinManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,15 +47,17 @@ public class MainActivity extends LouisAppCompatActivity {
 
     List<ClassifyBean> classifyBeanList = new ArrayList<>();
 
-    private String DEFAULT_THEMEFLAG="";
-    private String BLACK_THEMEFLAG="black";
-    private String nowThemeFlag=DEFAULT_THEMEFLAG;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //隐藏窗口写在了基类aty里 在这里报错
         setContentView(R.layout.activity_main);
+
+
+
+
 
         id_ll_top_indicatorGroup = (LinearLayout) findViewById(R.id.id_ll_top_indicatorGroup);
 //=================================
@@ -95,11 +97,13 @@ public class MainActivity extends LouisAppCompatActivity {
 
                         break;
                     case R.id.id_item_changeTheme:
-                        changeTheme();
-                        Toast.makeText(MainActivity.this, "id_item_changeTheme", Toast.LENGTH_SHORT).show();
+                        ThemeUtil.changeTheme(getApplicationContext());
+                        //Toast.makeText(MainActivity.this, "id_item_changeTheme", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.id_item_setting:
-                        Toast.makeText(MainActivity.this, "id_item_setting", Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(MainActivity.this,SettingActivity.class);
+                        MainActivity.this.startActivity(intent);
+                        //Toast.makeText(MainActivity.this, "id_item_setting", Toast.LENGTH_SHORT).show();
                         break;
                 }
 
@@ -237,8 +241,8 @@ public class MainActivity extends LouisAppCompatActivity {
                     long pos = expandableListView.getExpandableListPosition(npos);
                     int childPos = ExpandableListView.getPackedPositionChild(pos);// 获取第一行child的id
                     int groupPos = ExpandableListView.getPackedPositionGroup(pos);// 获取第一行group的id
-                    //Log.d(TAG, "onScroll: childPos"+childPos);
-                    //Log.d(TAG, "onScroll: groupPos"+groupPos);
+                    Log.d(TAG, "onScroll: childPos"+childPos);
+                    Log.d(TAG, "onScroll: groupPos"+groupPos);
                     if (childPos == AdapterView.INVALID_POSITION) {//
                         View groupView = expandableListView.getChildAt(npos
                                 - expandableListView.getFirstVisiblePosition());// 第一行的view
@@ -246,28 +250,25 @@ public class MainActivity extends LouisAppCompatActivity {
                     }
                     // get an error data, so return now
                     if (indicatorGroupHeight == 0) {
+                        Log.d(TAG, "onScroll: indicatorGroupHeight ERROR");
                         return;
                     }
+                    //第一个不显示
                     if (groupPos == AdapterView.INVALID_POSITION) {
+                        //2016年5月24日09:10:36
+                        idtbbar.setTitle("首页");
                         id_ll_top_indicatorGroup.setVisibility(View.GONE);
                         return;
                     }
+
+                    Log.d(TAG, "onScroll: indicatorGroupId"+indicatorGroupId);
                     // update the data of indicator group view
                     if (groupPos != indicatorGroupId) {// 如果指示器显示的不是当前group
                     /*myBaseExpandableListAdapter.getGroupView(groupPos, expandableListView.isGroupExpanded(groupPos),
                             id_ll_top_indicatorGroup.getChildAt(0), null);// 将指示器更新为当前group*/
 
                         indicatorGroupId = groupPos;
-                        // Log.d(TAG, "bind to new group,group position = " + groupPos);
-                        NewsDate newsdate = (NewsDate) myBaseExpandableListAdapter.getGroup(groupPos);
-                        if (newsdate != null) {
-                            /*TextView tv = (TextView) id_ll_top_indicatorGroup.getChildAt(0);
-                            tv.setText(newsdate.getDateStr());*/
 
-                            //2016年5月24日09:10:36
-                            idtbbar.setTitle(newsdate.getDateStr());
-
-                        }
 
 
                         // mAdapter.hideGroup(indicatorGroupId); // we set this group view
@@ -283,8 +284,20 @@ public class MainActivity extends LouisAppCompatActivity {
                         id_ll_top_indicatorGroup.setVisibility(View.GONE);
                     } else {
                         id_ll_top_indicatorGroup.setVisibility(View.GONE);
-                        //###2016年5月24日09:11:08
+                        //###2016年5月24日09:11:08 【group停留】 为了显示在标题栏，注释了
                         //###id_ll_top_indicatorGroup.setVisibility(View.VISIBLE);
+                    }
+                    // Log.d(TAG, "bind to new group,group position = " + groupPos);
+                    NewsDate newsdate = (NewsDate) myBaseExpandableListAdapter.getGroup(indicatorGroupId);
+                    if (newsdate != null) {
+                            /*
+                            //###2016年5月24日09:11:08 【group停留】
+                            TextView tv = (TextView) id_ll_top_indicatorGroup.getChildAt(0);
+                            tv.setText(newsdate.getDateStr());*/
+
+                        //2016年5月24日09:10:36
+                        idtbbar.setTitle(newsdate.getDateStr());
+
                     }
 
                     if (indicatorGroupId == -1) // 如果此时group的id无效，则返回
@@ -335,21 +348,8 @@ public class MainActivity extends LouisAppCompatActivity {
         }
     }
 
-    /**
-     * SkinManager.getInstance().changeSkin(suffix);
-     * 多套皮肤以后缀就行区别，比如：main_bg，皮肤资源可以为：main_bg_red,main_bg_green等。
 
-     换肤时，直接传入后缀，例如上面描述的red,green。
-     */
-    private void changeTheme() {
-        if (nowThemeFlag.equals(DEFAULT_THEMEFLAG)){
-            SkinManager.getInstance().changeSkin(BLACK_THEMEFLAG);
-            nowThemeFlag=BLACK_THEMEFLAG;
-        }else if(nowThemeFlag.equals(BLACK_THEMEFLAG)){
-            SkinManager.getInstance().removeAnySkin();
-            nowThemeFlag=DEFAULT_THEMEFLAG;
-        }
-    }
+
 
     private void initSliderLayout() {
        /* HashMap<String,String> url_maps = new HashMap<String, String>();
@@ -411,6 +411,12 @@ public class MainActivity extends LouisAppCompatActivity {
         // To prevent a memory leak on rotation, make sure to call stopAutoCycle() on the slider before activity or fragment is destroyed
         mSliderLayout.stopAutoCycle();
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 
     @Override

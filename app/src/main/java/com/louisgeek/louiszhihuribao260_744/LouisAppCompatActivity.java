@@ -19,6 +19,8 @@ public class LouisAppCompatActivity extends AppCompatActivity {
          supportRequestWindowFeature(Window.FEATURE_NO_TITLE);//还要加上 <item name="android:windowActionBar">false</item>
 
          SkinManager.getInstance().register(this);
+         //初始化主题
+         ThemeUtil.setupTheme();
     }
 
 

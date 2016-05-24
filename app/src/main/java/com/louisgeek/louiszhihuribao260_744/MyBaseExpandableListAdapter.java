@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import com.zhy.changeskin.SkinManager;
+
 import java.util.List;
 
 /**
@@ -17,6 +19,11 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
     public MyBaseExpandableListAdapter(Context context, List<NewsDate> newsDateList) {
         mContext = context;
         mNewsDateList = newsDateList;
+
+        //UPDATE
+       NewsDate newsDate= mNewsDateList.get(0);
+        newsDate.setDateStr("今日新闻");
+        mNewsDateList.set(0,newsDate);
     }
 
     private Context mContext;
@@ -70,10 +77,16 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
         }else{
             groupView= (GroupView) convertView.getTag(R.id.tag_viewholder);
         }
+        //2016年5月24日11:43:54  滚动时候换肤仍然有效
+        SkinManager.getInstance().injectSkin(convertView);
+
         NewsDate newsDate= mNewsDateList.get(groupPosition);
 
-        groupView.date.setText(newsDate.getDateStr());
-        convertView.setTag(R.id.tag_group_text,newsDate.getDateStr());
+
+            groupView.date.setText(newsDate.getDateStr());
+            convertView.setTag(R.id.tag_group_text,newsDate.getDateStr());
+
+
 
         return convertView;
     }
@@ -90,6 +103,9 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
         }else{
             childView= (ChildView) convertView.getTag(R.id.tag_viewholder);
         }
+        //2016年5月24日11:43:54  滚动时候换肤仍然有效
+        SkinManager.getInstance().injectSkin(convertView);
+
         NewsDate newsDate= mNewsDateList.get(groupPosition);
        // convertView.setTag(R.id.tag_group_text,newsDate.getDateStr());
 

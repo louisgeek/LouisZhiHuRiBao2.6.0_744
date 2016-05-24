@@ -5,7 +5,11 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <!--各控制元件(如：checkbox、switch 或是 radIO) 被勾选 (checked) 或是选定 (selected) 的颜色-->
+        <item name="colorAccent">@color/colorAccentNew</item>
+        <!--各控制元件(如：checkbox、switch 或是 radIO) 未被勾选 (checked) 或是未选定 (selected) 的颜色-->
+        <item name="android:textColorSecondary">@color/textColorSecondaryNew</item>
+
       <!--不用这种方式  &lt;!&ndash;这两句隐藏actionBar   也可以吧parent="xxx"改成parent="xxx.NoActionBar" &ndash;&gt;
         <item name="windowActionBar">false</item>
         &lt;!&ndash; 旧版本是 android:windowNoTitle&ndash;&gt;
@@ -29,7 +33,7 @@
         <!--各控制元件的预设颜色-->
         <item name="colorControlNormal">@android:color/white</item>
 
-        <!--各控制元件(如：check box、switch 或是 radoi) 被勾选 (checked) 或是选定 (selected) 的颜色-->
+        <!--各控制元件(如：checkbox、switch 或是 radIO) 被勾选 (checked) 或是选定 (selected) 的颜色-->
        <!-- <item name="colorAccent">@color/colorAccent</item>-->
 
         <!--App 的背景色-->
