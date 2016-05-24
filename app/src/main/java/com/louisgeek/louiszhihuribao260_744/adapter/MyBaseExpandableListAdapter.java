@@ -1,4 +1,4 @@
-package com.louisgeek.louiszhihuribao260_744;
+package com.louisgeek.louiszhihuribao260_744.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import com.louisgeek.louiszhihuribao260_744.R;
+import com.louisgeek.louiszhihuribao260_744.bean.NewsBean;
+import com.louisgeek.louiszhihuribao260_744.bean.NewsDateBean;
 import com.zhy.changeskin.SkinManager;
 
 import java.util.List;
@@ -16,18 +19,18 @@ import java.util.List;
  */
 public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
 
-    public MyBaseExpandableListAdapter(Context context, List<NewsDate> newsDateList) {
+    public MyBaseExpandableListAdapter(Context context, List<NewsDateBean> newsDateList) {
         mContext = context;
         mNewsDateList = newsDateList;
 
         //UPDATE
-       NewsDate newsDate= mNewsDateList.get(0);
+        NewsDateBean newsDate= mNewsDateList.get(0);
         newsDate.setDateStr("今日新闻");
         mNewsDateList.set(0,newsDate);
     }
 
     private Context mContext;
-    private List<NewsDate> mNewsDateList;
+    private List<NewsDateBean> mNewsDateList;
 
     @Override
     public int getGroupCount() {
@@ -80,7 +83,7 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
         //2016年5月24日11:43:54  滚动时候换肤仍然有效
         SkinManager.getInstance().injectSkin(convertView);
 
-        NewsDate newsDate= mNewsDateList.get(groupPosition);
+        NewsDateBean newsDate= mNewsDateList.get(groupPosition);
 
 
             groupView.date.setText(newsDate.getDateStr());
@@ -106,7 +109,7 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
         //2016年5月24日11:43:54  滚动时候换肤仍然有效
         SkinManager.getInstance().injectSkin(convertView);
 
-        NewsDate newsDate= mNewsDateList.get(groupPosition);
+        NewsDateBean newsDate= mNewsDateList.get(groupPosition);
        // convertView.setTag(R.id.tag_group_text,newsDate.getDateStr());
 
         NewsBean newsBean= newsDate.getNewsBeanList().get(childPosition);

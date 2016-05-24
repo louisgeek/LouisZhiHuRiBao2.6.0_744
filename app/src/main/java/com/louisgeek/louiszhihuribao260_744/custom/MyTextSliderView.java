@@ -1,4 +1,4 @@
-package com.louisgeek.louiszhihuribao260_744;
+package com.louisgeek.louiszhihuribao260_744.custom;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.louisgeek.louiszhihuribao260_744.R;
 
 /**
  * Created by louisgeek on 2016/5/23.

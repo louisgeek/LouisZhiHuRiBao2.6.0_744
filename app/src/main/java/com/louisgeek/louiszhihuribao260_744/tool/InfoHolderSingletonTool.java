@@ -1,4 +1,4 @@
-package com.louisgeek.louiszhihuribao260_744;
+package com.louisgeek.louiszhihuribao260_744.tool;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,23 +6,23 @@ import java.util.HashMap;
 /**
  * Created by louisgeek on 2016/5/24.
  */
-public class InfoHolderSingleton {
+public class InfoHolderSingletonTool {
 
 
     //单例模式实例
-    private static InfoHolderSingleton instance = null;
+    private static InfoHolderSingletonTool instance = null;
 
 
-    private InfoHolderSingleton()
+    private InfoHolderSingletonTool()
     {
         mHashMap = new HashMap<String,Object>();
         mArrayList=new ArrayList<Object>();
     }
 
     //synchronized 用于线程安全，防止多线程同时创建实例
-    public synchronized static InfoHolderSingleton getInstance(){
+    public synchronized static InfoHolderSingletonTool getInstance(){
         if(instance == null){
-            instance = new InfoHolderSingleton();
+            instance = new InfoHolderSingletonTool();
         }
         return instance;
     }

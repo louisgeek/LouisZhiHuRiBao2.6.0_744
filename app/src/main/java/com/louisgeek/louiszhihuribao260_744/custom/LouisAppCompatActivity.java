@@ -1,10 +1,11 @@
-package com.louisgeek.louiszhihuribao260_744;
+package com.louisgeek.louiszhihuribao260_744.custom;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
+import com.louisgeek.louiszhihuribao260_744.util.ThemeUtil;
 import com.zhy.changeskin.SkinManager;
 
 /**

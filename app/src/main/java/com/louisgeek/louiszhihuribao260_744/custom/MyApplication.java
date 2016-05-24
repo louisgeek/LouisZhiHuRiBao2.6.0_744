@@ -1,7 +1,10 @@
-package com.louisgeek.louiszhihuribao260_744;
+package com.louisgeek.louiszhihuribao260_744.custom;
 
 import android.app.Application;
 
+import com.louisgeek.louiszhihuribao260_744.info.Constants;
+import com.louisgeek.louiszhihuribao260_744.tool.InfoHolderSingletonTool;
+import com.louisgeek.louiszhihuribao260_744.util.SharedPreferencesUtil;
 import com.zhy.changeskin.SkinManager;
 
 /**
@@ -20,9 +23,9 @@ public class MyApplication extends Application{
     }
 
     private void initThemeSetting() {
-        String nowthemeValue=SharedPreferencesUtil.getThemeValue(getApplicationContext());
+        String nowthemeValue= SharedPreferencesUtil.getThemeValue(getApplicationContext());
         //存入InfoHolderSingleton
-        InfoHolderSingleton.getInstance().putMapObj(Constants.INFOHOLDER_NOW_THEME_KEY,nowthemeValue);
+        InfoHolderSingletonTool.getInstance().putMapObj(Constants.INFOHOLDER_NOW_THEME_KEY,nowthemeValue);
     }
 
 

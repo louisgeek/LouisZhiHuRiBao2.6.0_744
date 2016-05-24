@@ -2,35 +2,35 @@
 
     <PreferenceCategory android:title="常规">
 
-        <com.louisgeek.louiszhihuribao260_744.MyCheckBoxPreference
+        <com.louisgeek.louiszhihuribao260_744.custom.MyCheckBoxPreference
             android:key="checkbox_preference_wifi"
             android:title="自动离线下载"
             android:summary="仅在Wi-Fi下可用，自动下载最新内容"
              />
-        <com.louisgeek.louiszhihuribao260_744.MyCheckBoxPreference
+        <com.louisgeek.louiszhihuribao260_744.custom.MyCheckBoxPreference
             android:key="checkbox_preference_nopic"
             android:title="无图模式"
             android:summary="2G/3G网络下不下载图片"
             />
-        <com.louisgeek.louiszhihuribao260_744.MyCheckBoxPreference
+        <com.louisgeek.louiszhihuribao260_744.custom.MyCheckBoxPreference
             android:key="checkbox_preference_big"
             android:title="大字号"
             />
     </PreferenceCategory>
     <PreferenceCategory android:title="其他" >
-        <com.louisgeek.louiszhihuribao260_744.MyCheckBoxPreference
+        <com.louisgeek.louiszhihuribao260_744.custom.MyCheckBoxPreference
             android:key="checkbox_preference_msg"
             android:title="推送消息"
             />
-        <com.louisgeek.louiszhihuribao260_744.MyCheckBoxPreference
+        <com.louisgeek.louiszhihuribao260_744.custom.MyCheckBoxPreference
             android:key="checkbox_preference_share"
             android:title="点评分享到微博"
             />
-        <com.louisgeek.louiszhihuribao260_744.MyPreference
+        <com.louisgeek.louiszhihuribao260_744.custom.MyPreference
             android:key="preference_clear"
             android:title="清除缓存"
             />
-        <com.louisgeek.louiszhihuribao260_744.MyPreference
+        <com.louisgeek.louiszhihuribao260_744.custom.MyPreference
             android:key="preference_update"
             android:title="检查更新"
             android:summary="版本:2.6.0(744)"
@@ -51,7 +51,7 @@
             android:title="请选择一项" />-->
     </PreferenceCategory>
     <PreferenceCategory  android:title="反馈">
-        <com.louisgeek.louiszhihuribao260_744.MyPreference
+        <com.louisgeek.louiszhihuribao260_744.custom.MyPreference
             android:key="preference_feedback"
             android:title="意见反馈"
             />

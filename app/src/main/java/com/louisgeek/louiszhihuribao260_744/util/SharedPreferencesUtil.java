@@ -1,7 +1,9 @@
-package com.louisgeek.louiszhihuribao260_744;
+package com.louisgeek.louiszhihuribao260_744.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.louisgeek.louiszhihuribao260_744.info.Constants;
 
 /**
  * Created by louisgeek on 2016/5/24.

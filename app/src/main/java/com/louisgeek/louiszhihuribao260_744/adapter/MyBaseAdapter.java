@@ -1,4 +1,4 @@
-package com.louisgeek.louiszhihuribao260_744;
+package com.louisgeek.louiszhihuribao260_744.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.louisgeek.louiszhihuribao260_744.R;
+import com.louisgeek.louiszhihuribao260_744.bean.ClassifyBean;
 
 import java.util.List;
 
@@ -120,7 +123,7 @@ public class MyBaseAdapter extends BaseAdapter {
         ImageView id_iv_dy;
     }
 
-    interface  OnDingYue{
+   public interface  OnDingYue{
         boolean dingyue(int pos);
     }
 

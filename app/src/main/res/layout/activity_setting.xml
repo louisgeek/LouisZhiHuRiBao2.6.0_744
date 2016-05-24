@@ -10,6 +10,6 @@
     android:layout_height="match_parent"
     android:background="@color/setting_bg_color"
     android:tag="skin:setting_bg_color:background"
-    tools:context="com.louisgeek.louiszhihuribao260_744.SettingActivity">
+    tools:context=".activity.SettingActivity">
 
 </RelativeLayout>

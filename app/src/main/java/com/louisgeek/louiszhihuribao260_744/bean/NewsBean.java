@@ -1,4 +1,4 @@
-package com.louisgeek.louiszhihuribao260_744;
+package com.louisgeek.louiszhihuribao260_744.bean;
 
 /**
  * Created by louisgeek on 2016/5/23.

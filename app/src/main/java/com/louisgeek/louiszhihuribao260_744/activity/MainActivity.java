@@ -1,4 +1,4 @@
-package com.louisgeek.louiszhihuribao260_744;
+package com.louisgeek.louiszhihuribao260_744.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +24,14 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.louisgeek.louiszhihuribao260_744.R;
+import com.louisgeek.louiszhihuribao260_744.adapter.MyBaseAdapter;
+import com.louisgeek.louiszhihuribao260_744.adapter.MyBaseExpandableListAdapter;
+import com.louisgeek.louiszhihuribao260_744.bean.ClassifyBean;
+import com.louisgeek.louiszhihuribao260_744.bean.NewsBean;
+import com.louisgeek.louiszhihuribao260_744.bean.NewsDateBean;
+import com.louisgeek.louiszhihuribao260_744.custom.LouisAppCompatActivity;
+import com.louisgeek.louiszhihuribao260_744.util.ThemeUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -175,9 +183,9 @@ public class MainActivity extends LouisAppCompatActivity {
         initSliderLayout();
 
         //=================================
-        List<NewsDate> newsDateList = new ArrayList<>();
+        List<NewsDateBean> newsDateList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            NewsDate newsDate = new NewsDate();
+            NewsDateBean newsDate = new NewsDateBean();
             newsDate.setDateStr("1992-06-29 18:54:3" + i);
 
             List<NewsBean> newsBeanList = new ArrayList<>();
@@ -288,7 +296,7 @@ public class MainActivity extends LouisAppCompatActivity {
                         //###id_ll_top_indicatorGroup.setVisibility(View.VISIBLE);
                     }
                     // Log.d(TAG, "bind to new group,group position = " + groupPos);
-                    NewsDate newsdate = (NewsDate) myBaseExpandableListAdapter.getGroup(indicatorGroupId);
+                    NewsDateBean newsdate = (NewsDateBean) myBaseExpandableListAdapter.getGroup(indicatorGroupId);
                     if (newsdate != null) {
                             /*
                             //###2016年5月24日09:11:08 【group停留】

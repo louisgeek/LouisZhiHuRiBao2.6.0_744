@@ -1,11 +1,11 @@
-package com.louisgeek.louiszhihuribao260_744;
+package com.louisgeek.louiszhihuribao260_744.bean;
 
 import java.util.List;
 
 /**
  * Created by louisgeek on 2016/5/23.
  */
-public class NewsDate {
+public class NewsDateBean {
     private  String dateStr;
     private List<NewsBean> newsBeanList;
     public String getDateStr() {
