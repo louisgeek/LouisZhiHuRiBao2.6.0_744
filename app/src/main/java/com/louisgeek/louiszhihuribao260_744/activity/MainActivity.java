@@ -1,16 +1,11 @@
 package com.louisgeek.louiszhihuribao260_744.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -73,9 +68,8 @@ public class MainActivity extends LouisAppCompatActivity {
 
 
 
-
         id_ll_top_indicatorGroup = (LinearLayout) findViewById(R.id.id_ll_top_indicatorGroup);
-//=================================
+        //=================================
         idtbbar = (Toolbar) findViewById(R.id.id_tb_bar);
         TextView idtv4bar = (TextView) findViewById(R.id.id_tv_4bar);
         idtv4bar.setVisibility(View.GONE);
@@ -93,7 +87,7 @@ public class MainActivity extends LouisAppCompatActivity {
        ActionBar actionBar = getSupportActionBar();
         //actionBar.setDefaultDisplayHomeAsUpEnabled(true);//这里无效
         actionBar.setHomeButtonEnabled(true); //设置返回键可用
-         actionBar.setDisplayHomeAsUpEnabled(true);*/
+         actionBar.setDisplayHomeAsUpEnabled(true);// 给左上角图标的左边加上一个返回的图标*/
 
 
         /**
@@ -112,8 +106,13 @@ public class MainActivity extends LouisAppCompatActivity {
 
                         break;
                     case R.id.id_item_changeTheme:
-                        ThemeUtil.changeTheme(getApplicationContext());
+                        ThemeUtil.changeTheme(getApplicationContext(),idtbbar);
+                        //invalidateOptionsMenu();
+                       // supportInvalidateOptionsMenu();
+                        //getWindow().invalidatePanelMenu(Window.FEATURE_OPTIONS_PANEL);
                         //Toast.makeText(MainActivity.this, "id_item_changeTheme", Toast.LENGTH_SHORT).show();
+                        //reloadSelfViewTwo();
+                        // reloadSelfView();
                         break;
                     case R.id.id_item_setting:
                         Intent intent=new Intent(MainActivity.this,SettingActivity.class);
@@ -193,7 +192,7 @@ public class MainActivity extends LouisAppCompatActivity {
         List<NewsDateBean> newsDateList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             NewsDateBean newsDate = new NewsDateBean();
-            newsDate.setDateStr("1992-06-29 18:54:3" + i);
+            newsDate.setDateStr("1992-06-2"+i+" 星期" + i);
 
             List<NewsBean> newsBeanList = new ArrayList<>();
             for (int j = 0; j < 5; j++) {
@@ -363,7 +362,29 @@ public class MainActivity extends LouisAppCompatActivity {
         }
     }
 
+    /**
+     * 自我刷新 Activity 2015年6月10日18:09:51
+     */
+    public void reloadSelfView() {
+        finish();
+        // Intent intent = new Intent(MainActivity.this, MainActivity.class);
+        Intent intent = getIntent();
+        startActivity(intent);
+       // ActivityAnimTool.setAnim(this, ActivityAnimTool.DAN_RU_DAN_CHU);
+    }
 
+
+    /**
+     * 刷新 不设置进入退出动画
+     */
+    public void reloadSelfViewTwo() {
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);// 不设置进入退出动画
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(intent);
+    }
 
 
     private void initSliderLayout() {
@@ -432,78 +453,57 @@ public class MainActivity extends LouisAppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
+
     }
 
-    @Override
+   /*
+   只会调用一次，他只会在Menu显示之前去调用一次，之后就不会在去调用。
+   @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-       // setMenuBackgroundAndTextColor();
+
 
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+
         return true;
         // return super.onCreateOptionsMenu(menu);
+    }*/
+/**每次在显示 Menu之前，都会去调用，只要按一次Menu按鍵，就会调用一次。所以可以在这里动态的改变menu。
+ */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        //Toast.makeText(MainActivity.this, "menu"+menu, Toast.LENGTH_SHORT).show();
+        //
+      /*  View  popupView = getLayoutInflater().inflate(R.layout.popupwindow, null);
+        final PopupWindow mPopupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        mPopupWindow.setTouchable(true);
+        mPopupWindow.setOutsideTouchable(true);
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+        *//**
+         * 这个parent的作用应该是调用其getWindowToken()方法获取窗口的Token,所以，只要是该窗口上的控件就可以了。
+         第二个参数是Gravity，可以使用|附加多个属性，如Gravity.LEFT|Gravity.BOTTOM。
+         第三四个参数是x,y偏移。
+         *//*
+        mPopupWindow.showAtLocation(idtbbar, Gravity.RIGHT|Gravity.TOP,0,10);*/
+
+       menu.clear();
+
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+
+        //动态改变action menu 文字
+        MenuItem id_item_changeTheme= menu.findItem(R.id.id_item_changeTheme);
+        String nowThemeValue= InfoHolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
+        if (nowThemeValue.equals(Constants.THEME_DEFAULT_THEMEFLAG)) {
+            id_item_changeTheme.setTitle("夜间模式");
+        }else if (nowThemeValue.equals(Constants.THEME_BLACK_THEMEFLAG)) {
+            id_item_changeTheme.setTitle("日间模式");
+        }
+
+        return true;
+        //return super.onPrepareOptionsMenu(menu);
     }
-    /** 设置Menu的背景图 */
-    protected void setMenuBackgroundAndTextColor() {
-       LayoutInflater layoutInflater=getLayoutInflater();
-        layoutInflater.setFactory(new LayoutInflater.Factory()
-        {
-
-            @Override
-            public View onCreateView(String name, Context context,
-                                     AttributeSet attrs)
-            {
-                System.out.println(name);
-                if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")
-                        || name.equalsIgnoreCase("com.android.internal.view.menu.ActionMenuItemView"))
-                {
-                    try
-                    {
-                        LayoutInflater f = getLayoutInflater();
-                        final View view = f.createView(name, null, attrs);
-                        System.out.println((view instanceof TextView));
-                        if(view instanceof TextView){
-
-                            String nowThemeValue= InfoHolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
-                            if (nowThemeValue.equals(Constants.THEME_DEFAULT_THEMEFLAG)) {
-                                ((TextView)view).setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.items_menu_text_color));
-                            }else if (nowThemeValue.equals(Constants.THEME_BLACK_THEMEFLAG)) {
-                                ((TextView)view).setTextColor(ContextCompat.getColor(getApplicationContext(),R.color.items_menu_text_color_black));
-                            }
 
 
-                        }else{
-                            new Handler().post(new Runnable() {
-                                public void run() {
-                                    String nowThemeValue= InfoHolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
-                                    if (nowThemeValue.equals(Constants.THEME_DEFAULT_THEMEFLAG)) {
-                                        //设置背景
-                                        view.setBackgroundResource(R.color.items_menu_bg_color);
-                                    }else if (nowThemeValue.equals(Constants.THEME_BLACK_THEMEFLAG)) {
-                                        //设置背景
-                                        view.setBackgroundResource(R.color.items_menu_bg_color_black);
-                                    }
-
-
-
-                                }
-                            });
-                        }
-                        return view;
-                    } catch (InflateException e)
-                    {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-                return null;
-            }
-
-        });
-
-    }
 
 /*
 采用 ActionBarDrawerToggle 关联iddrawer和idtbbar 实现三条线和返回箭头动态变化
@@ -519,4 +519,7 @@ public class MainActivity extends LouisAppCompatActivity {
         return true;
         //return super.onOptionsItemSelected(item);
     }*/
+
+
+
 }

@@ -41,8 +41,20 @@
 
         <!--导航栏的背景色，但只能用在 API Level 21 (Android 5) 以上的版本-->
        <!-- <item name="android:navigationBarColor">@color/colorAccent</item>-->
-        <item name="actionMenuTextColor">@color/colorAccent</item>
+        <!--<item name="actionMenuTextColor">#ff63BBF7</item>-->
+        <!--<item name="actionMenuTextColor">@color/colorAccent</item>-->
         <item name="android:textSize">18dp</item> <!--  字体大小-->
 
+    </style>
+
+    <style name="ToolbarPopupTheme_default" parent="@style/ThemeOverlay.AppCompat.Light">
+        <!---->
+        <item name="android:textColor">@color/items_menu_text_color</item>
+        <item name="android:background">@color/items_menu_bg_color</item>
+    </style>
+    <style name="ToolbarPopupTheme_black" parent="@style/ThemeOverlay.AppCompat.Light">
+        <!---->
+        <item name="android:textColor">@color/items_menu_text_color_black</item>
+        <item name="android:background">@color/items_menu_bg_color_black</item>
     </style>
 </resources>

@@ -8,5 +8,23 @@
     android:background="@color/setting_bg_color"
     android:tag="skin:setting_bg_color:background"
     tools:context=".activity.SettingActivity">
+    <!--  android:theme="@style/ToolbarTheme"-->
+    <android.support.v7.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/id_tb_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:theme="@style/ToolbarTheme"
+        android:background="@color/toolbar_bg_color"
+        android:tag="skin:toolbar_bg_color:background"
+        app:popupTheme="@style/ToolbarPopupTheme_default"
+        >
+    </android.support.v7.widget.Toolbar>
+    <FrameLayout
+        android:id="@+id/id_fl_4_fragment"
+        android:layout_below="@id/id_tb_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+    </FrameLayout>
 </RelativeLayout>
