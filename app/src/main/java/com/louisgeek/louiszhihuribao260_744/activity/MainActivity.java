@@ -2,7 +2,9 @@ package com.louisgeek.louiszhihuribao260_744.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -34,6 +36,7 @@ import com.louisgeek.louiszhihuribao260_744.custom.LouisAppCompatActivity;
 import com.louisgeek.louiszhihuribao260_744.info.Constants;
 import com.louisgeek.louiszhihuribao260_744.tool.HolderSingletonTool;
 import com.louisgeek.louiszhihuribao260_744.tool.ThemeTool;
+import com.louisgeek.louiszhihuribao260_744.util.DensityUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,7 +57,7 @@ public class MainActivity extends LouisAppCompatActivity {
     private int indicatorGroupHeight;
     private int indicatorGroupId = -1;
 
-
+    List<NewsDateBean> newsDateList=new ArrayList<>();
     List<ClassifyBean> classifyBeanList = new ArrayList<>();
 
 
@@ -190,22 +193,7 @@ public class MainActivity extends LouisAppCompatActivity {
         initSliderLayout();
 
         //=================================
-        List<NewsDateBean> newsDateList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            NewsDateBean newsDate = new NewsDateBean();
-            newsDate.setDateStr("1992-06-2"+i+" 星期" + i);
-
-            List<NewsBean> newsBeanList = new ArrayList<>();
-            for (int j = 0; j < 5; j++) {
-                NewsBean newsBean = new NewsBean();
-                newsBean.setTitle(i + "标题" + j);
-                newsBean.setContent(i + "内容" + j);
-                newsBeanList.add(newsBean);
-            }
-
-            newsDate.setNewsBeanList(newsBeanList);
-            newsDateList.add(newsDate);
-        }
+        initData();
 
         expandableListView = (ExpandableListView) findViewById(R.id.id_elv);
 
@@ -361,8 +349,75 @@ public class MainActivity extends LouisAppCompatActivity {
             classifyBean.setHasHolder(true);
             classifyBeanList.add(classifyBean);
         }
+
+
+
+        //
+        initSwipeLayout();
     }
 
+    private void initData() {
+        newsDateList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            NewsDateBean newsDate = new NewsDateBean();
+            newsDate.setDateStr("1992-06-2"+i+" 星期" + i);
+
+            List<NewsBean> newsBeanList = new ArrayList<>();
+            for (int j = 0; j < 5; j++) {
+                NewsBean newsBean = new NewsBean();
+                newsBean.setTitle(i + "标题" + j);
+                newsBean.setContent(i + "内容" + j);
+                newsBeanList.add(newsBean);
+            }
+
+            newsDate.setNewsBeanList(newsBeanList);
+            newsDateList.add(newsDate);
+        }
+    }
+
+    private void initSwipeLayout() {
+        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.id_swipe_refresh);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        //swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
+        int size = DensityUtil.dip2pxComm(this, 25);
+        // 第一次进入页面的时候显示加载进度条
+        swipeRefreshLayout.setProgressViewOffset(false, 0, size);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshData();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 3 * 1000);
+            }
+        });
+    }
+    //模拟刷新数据
+    private void refreshData() {
+        newsDateList.clear();
+        //temp_data_count_page = 0;//回到第一页
+      //  doConfigLinsenerChange();//【测试用】重新设置下面的文字
+        for (int i = 0; i < 10; i++) {
+            NewsDateBean newsDate = new NewsDateBean();
+            newsDate.setDateStr("2016-05-2"+i+" 星期" + i);
+
+            List<NewsBean> newsBeanList = new ArrayList<>();
+            for (int j = 0; j < 5; j++) {
+                NewsBean newsBean = new NewsBean();
+                newsBean.setTitle(i + "标题" + j);
+                newsBean.setContent(i + "内容" + j);
+                newsBeanList.add(newsBean);
+            }
+
+            newsDate.setNewsBeanList(newsBeanList);
+            newsDateList.add(newsDate);
+        }
+        myBaseExpandableListAdapter.notifyDataSetChanged();
+    }
     /**
      * 自我刷新 Activity 2015年6月10日18:09:51
      */

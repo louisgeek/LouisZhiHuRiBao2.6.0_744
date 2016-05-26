@@ -48,13 +48,16 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"/>
             </LinearLayout>
-
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/id_swipe_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <ExpandableListView
                 android:id="@+id/id_elv"
                 android:groupIndicator="@null"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
+            </android.support.v4.widget.SwipeRefreshLayout>
         </LinearLayout>
 
         <!--侧滑菜单布局   也可以自定义实现这部分Drawer-->
