@@ -33,7 +33,7 @@ import com.louisgeek.louiszhihuribao260_744.bean.NewsDateBean;
 import com.louisgeek.louiszhihuribao260_744.custom.LouisAppCompatActivity;
 import com.louisgeek.louiszhihuribao260_744.info.Constants;
 import com.louisgeek.louiszhihuribao260_744.tool.InfoHolderSingletonTool;
-import com.louisgeek.louiszhihuribao260_744.util.ThemeUtil;
+import com.louisgeek.louiszhihuribao260_744.tool.ThemeTool;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -106,7 +106,7 @@ public class MainActivity extends LouisAppCompatActivity {
 
                         break;
                     case R.id.id_item_changeTheme:
-                        ThemeUtil.changeTheme(getApplicationContext(),idtbbar);
+                        ThemeTool.changeTheme(getApplicationContext(),idtbbar);
                         //invalidateOptionsMenu();
                        // supportInvalidateOptionsMenu();
                         //getWindow().invalidatePanelMenu(Window.FEATURE_OPTIONS_PANEL);

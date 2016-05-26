@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,20 +7,64 @@
     android:background="@android:color/black"
     android:orientation="vertical"
     tools:context="com.louisgeek.louiszhihuribao260_744.activity.SplashActivity">
-    <ImageView
-        android:id="@+id/id_iv_splash"
-        android:layout_width="wrap_content"
-        android:scaleType="centerInside"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        />
-    <TextView
-        android:text="知乎日报"
-        android:textSize="30dp"
+   <FrameLayout
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1"
+       >
+       <ImageView
+           android:id="@+id/id_iv_splash"
+           android:layout_width="match_parent"
+           android:scaleType="centerCrop"
+           android:adjustViewBounds="true"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           />
+       <TextView
+           android:id="@+id/id_tv"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="text"
+           android:layout_marginBottom="18dp"
+           android:textColor="@android:color/white"
+           android:layout_gravity="bottom|center_horizontal"
+           />
+
+   </FrameLayout>
+    <RelativeLayout
+        android:padding="20dp"
+        android:id="@+id/id_rl_title"
+       android:gravity="center_horizontal"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="#00ACED"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-</RelativeLayout>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/id_iv"
+            android:layout_width="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_toRightOf="@id/id_iv"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="知乎日报"
+                android:textSize="30dp"
+                android:textColor="#00ACED"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:text="每天三次，每次七分钟"
+                android:textSize="20dp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

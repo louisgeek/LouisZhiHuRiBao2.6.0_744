@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
-import com.louisgeek.louiszhihuribao260_744.util.ThemeUtil;
+import com.louisgeek.louiszhihuribao260_744.tool.ThemeTool;
 import com.zhy.changeskin.SkinManager;
 
 /**
@@ -21,7 +21,7 @@ public class LouisAppCompatActivity extends AppCompatActivity {
 
          SkinManager.getInstance().register(this);
          //初始化主题
-         ThemeUtil.setupTheme();
+         ThemeTool.setupTheme();
     }
 
 

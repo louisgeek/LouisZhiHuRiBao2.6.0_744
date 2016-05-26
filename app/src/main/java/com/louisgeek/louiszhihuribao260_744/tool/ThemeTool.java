@@ -1,17 +1,17 @@
-package com.louisgeek.louiszhihuribao260_744.util;
+package com.louisgeek.louiszhihuribao260_744.tool;
 
 import android.content.Context;
 import android.support.v7.widget.Toolbar;
 
 import com.louisgeek.louiszhihuribao260_744.info.Constants;
-import com.louisgeek.louiszhihuribao260_744.tool.InfoHolderSingletonTool;
+import com.louisgeek.louiszhihuribao260_744.util.SharedPreferencesUtil;
 import com.zhy.changeskin.SkinManager;
 
 /**
  * Created by louisgeek on 2016/5/24.
  */
-public class ThemeUtil {
-    private static final String TAG = "ThemeUtil";
+public class ThemeTool {
+    private static final String TAG = "ThemeTool";
     public static void setupTheme(){
          String nowthemeValue= InfoHolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
         if (nowthemeValue.equals(Constants.THEME_DEFAULT_THEMEFLAG)){

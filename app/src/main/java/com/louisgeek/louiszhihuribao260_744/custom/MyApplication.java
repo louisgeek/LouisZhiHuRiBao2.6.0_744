@@ -1,6 +1,7 @@
 package com.louisgeek.louiszhihuribao260_744.custom;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.louisgeek.louiszhihuribao260_744.info.Constants;
 import com.louisgeek.louiszhihuribao260_744.tool.InfoHolderSingletonTool;
@@ -18,11 +19,12 @@ import okhttp3.OkHttpClient;
 public class MyApplication extends Application{
 
     private static final String TAG = "MyApplication";
+    private static Context context;
     @Override
     public void onCreate() {
         super.onCreate();
         SkinManager.getInstance().init(this);
-
+        context=getApplicationContext();
         initThemeSetting();
         initOkHttpUtils();
     }
@@ -45,4 +47,7 @@ public class MyApplication extends Application{
     }
 
 
+    public static Context getAppContext(){
+        return context;
+    }
 }
