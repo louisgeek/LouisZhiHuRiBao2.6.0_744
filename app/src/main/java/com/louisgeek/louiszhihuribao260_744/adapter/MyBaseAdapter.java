@@ -79,7 +79,7 @@ public class MyBaseAdapter extends BaseAdapter {
                 HomeViewHolder homeViewHolder;
                 if (convertView==null){
                     homeViewHolder=new HomeViewHolder();
-                    convertView= LayoutInflater.from(context).inflate(R.layout.left_listview_item_home,parent,false);
+                    convertView= LayoutInflater.from(context).inflate(R.layout.left_list_item_home,parent,false);
                     homeViewHolder.homeTv= (TextView) convertView.findViewById(R.id.id_lv_tv);
                     convertView.setTag(homeViewHolder);
                 }else{
@@ -93,7 +93,7 @@ public class MyBaseAdapter extends BaseAdapter {
                 ViewHolder viewHolder;
                 if (convertView==null){
                     viewHolder=new ViewHolder();
-                    convertView= LayoutInflater.from(context).inflate(R.layout.left_listview_item,parent,false);
+                    convertView= LayoutInflater.from(context).inflate(R.layout.left_list_item,parent,false);
                     viewHolder.textView= (TextView) convertView.findViewById(R.id.id_lv_tv);
                     viewHolder.id_iv_dy= (ImageView) convertView.findViewById(R.id.id_iv_dy);
                     viewHolder.id_iv_dy.setOnClickListener(new View.OnClickListener() {

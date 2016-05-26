@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.louisgeek.louiszhihuribao260_744.R;
 import com.louisgeek.louiszhihuribao260_744.info.Constants;
-import com.louisgeek.louiszhihuribao260_744.tool.InfoHolderSingletonTool;
+import com.louisgeek.louiszhihuribao260_744.tool.HolderSingletonTool;
 
 /**
  * Created by louisgeek on 2016/5/24.
@@ -39,7 +39,7 @@ public class MyCheckBoxPreference extends CheckBoxPreference {
        /* Typeface tf = Typeface.createFromAsset(view.getContext().getAssets(), robotoRegular);
         titleView.setTypeface(tf);*/
 
-        String nowThemeValue= InfoHolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
+        String nowThemeValue= HolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
         if (nowThemeValue.equals(Constants.THEME_DEFAULT_THEMEFLAG)) {
             titleView.setTextColor(ContextCompat.getColor(getContext(), R.color.setting_title_text_color));
         }else if (nowThemeValue.equals(Constants.THEME_BLACK_THEMEFLAG)) {

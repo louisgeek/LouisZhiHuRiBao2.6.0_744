@@ -8,7 +8,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.louisgeek.louiszhihuribao260_744.custom.MyApplication;
+import com.louisgeek.louiszhihuribao260_744.custom.LouisApplication;
 
 /**
  * Created by louisgeek on 2016/5/26.
@@ -18,7 +18,7 @@ public class ScreenUtil {
 
     public final static int getScreenWidth(Activity activity) {
         if(activity==null){
-            return getScreenWidth(MyApplication.getAppContext());
+            return getScreenWidth(LouisApplication.getAppContext());
         }
         DisplayMetrics dm = activity.getResources().getDisplayMetrics();
         int w_screen = dm.widthPixels;
@@ -27,7 +27,7 @@ public class ScreenUtil {
 
     public final static int getScreenHeight(Activity activity) {
         if(activity==null){
-            return getScreenHeight(MyApplication.getAppContext());
+            return getScreenHeight(LouisApplication.getAppContext());
         }
         DisplayMetrics dm = activity.getResources().getDisplayMetrics();
         int h_screen = dm.heightPixels;

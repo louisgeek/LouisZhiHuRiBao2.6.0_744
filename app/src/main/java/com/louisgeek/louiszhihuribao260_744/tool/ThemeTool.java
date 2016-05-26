@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.Toolbar;
 
 import com.louisgeek.louiszhihuribao260_744.info.Constants;
-import com.louisgeek.louiszhihuribao260_744.util.SharedPreferencesUtil;
+import com.louisgeek.louiszhihuribao260_744.util.ThemeSharedPreferencesUtil;
 import com.zhy.changeskin.SkinManager;
 
 /**
@@ -13,7 +13,7 @@ import com.zhy.changeskin.SkinManager;
 public class ThemeTool {
     private static final String TAG = "ThemeTool";
     public static void setupTheme(){
-         String nowthemeValue= InfoHolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
+         String nowthemeValue= HolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
         if (nowthemeValue.equals(Constants.THEME_DEFAULT_THEMEFLAG)){
             SkinManager.getInstance().removeAnySkin();
         }else if(nowthemeValue.equals(Constants.THEME_BLACK_THEMEFLAG))
@@ -30,7 +30,7 @@ public class ThemeTool {
      */
     public static  void changeTheme(Context context, final Toolbar toolbar) {
         //读取
-        String nowThemeValue=InfoHolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
+        String nowThemeValue= HolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
         if (nowThemeValue.equals(Constants.THEME_DEFAULT_THEMEFLAG)){
 
             SkinManager.getInstance().changeSkin(Constants.THEME_BLACK_THEMEFLAG);
@@ -43,8 +43,8 @@ public class ThemeTool {
             nowThemeValue=Constants.THEME_DEFAULT_THEMEFLAG;
         }
         //存入新的
-        InfoHolderSingletonTool.getInstance().putMapObj(Constants.INFOHOLDER_NOW_THEME_KEY,nowThemeValue);
+        HolderSingletonTool.getInstance().putMapObj(Constants.INFOHOLDER_NOW_THEME_KEY,nowThemeValue);
         //保存文件
-        SharedPreferencesUtil.saveThemeValue(context,nowThemeValue);
+        ThemeSharedPreferencesUtil.saveThemeValue(context,nowThemeValue);
     }
 }

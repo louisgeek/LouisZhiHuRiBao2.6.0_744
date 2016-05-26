@@ -4,8 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.louisgeek.louiszhihuribao260_744.info.Constants;
-import com.louisgeek.louiszhihuribao260_744.tool.InfoHolderSingletonTool;
-import com.louisgeek.louiszhihuribao260_744.util.SharedPreferencesUtil;
+import com.louisgeek.louiszhihuribao260_744.tool.HolderSingletonTool;
+import com.louisgeek.louiszhihuribao260_744.util.ThemeSharedPreferencesUtil;
 import com.zhy.changeskin.SkinManager;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -16,9 +16,9 @@ import okhttp3.OkHttpClient;
 /**
  * Created by louisgeek on 2016/5/24.
  */
-public class MyApplication extends Application{
+public class LouisApplication extends Application{
 
-    private static final String TAG = "MyApplication";
+    private static final String TAG = "LouisApplication";
     private static Context context;
     @Override
     public void onCreate() {
@@ -30,9 +30,9 @@ public class MyApplication extends Application{
     }
 
     private void initThemeSetting() {
-        String nowthemeValue= SharedPreferencesUtil.getThemeValue(getApplicationContext());
+        String nowthemeValue= ThemeSharedPreferencesUtil.getThemeValue(getApplicationContext());
         //存入InfoHolderSingleton
-        InfoHolderSingletonTool.getInstance().putMapObj(Constants.INFOHOLDER_NOW_THEME_KEY,nowthemeValue);
+        HolderSingletonTool.getInstance().putMapObj(Constants.INFOHOLDER_NOW_THEME_KEY,nowthemeValue);
     }
 
     private void initOkHttpUtils(){

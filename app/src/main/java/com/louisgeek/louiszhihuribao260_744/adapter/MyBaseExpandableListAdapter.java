@@ -72,7 +72,7 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
         GroupView groupView ;
         if (convertView==null){
             groupView=new GroupView();
-            convertView= LayoutInflater.from(mContext).inflate(R.layout.group_item,parent,false);
+            convertView= LayoutInflater.from(mContext).inflate(R.layout.main_list_group_item,parent,false);
             groupView.date= (TextView) convertView.findViewById(R.id.date);
 
             convertView.setTag(R.id.tag_viewholder,groupView);
@@ -99,7 +99,7 @@ public class MyBaseExpandableListAdapter extends BaseExpandableListAdapter {
         ChildView childView ;
         if (convertView==null){
             childView=new ChildView();
-            convertView= LayoutInflater.from(mContext).inflate(R.layout.child_item,parent,false);
+            convertView= LayoutInflater.from(mContext).inflate(R.layout.main_list_child_item,parent,false);
             childView.title= (TextView) convertView.findViewById(R.id.title);
             childView.content= (TextView) convertView.findViewById(R.id.content);
             convertView.setTag(R.id.tag_viewholder,childView);

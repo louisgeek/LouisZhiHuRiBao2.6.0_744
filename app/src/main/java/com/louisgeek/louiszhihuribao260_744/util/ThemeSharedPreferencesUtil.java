@@ -8,7 +8,7 @@ import com.louisgeek.louiszhihuribao260_744.info.Constants;
 /**
  * Created by louisgeek on 2016/5/24.
  */
-public class SharedPreferencesUtil {
+public class ThemeSharedPreferencesUtil {
     private final static String SHARED_PREFERENCES_FILENAME="SP_NowTheme";
     public  final static String NOW_THEME_KEY="NowTheme";
 

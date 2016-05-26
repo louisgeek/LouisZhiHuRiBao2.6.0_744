@@ -6,23 +6,23 @@ import java.util.HashMap;
 /**
  * Created by louisgeek on 2016/5/24.
  */
-public class InfoHolderSingletonTool {
+public class HolderSingletonTool {
 
 
     //单例模式实例
-    private static InfoHolderSingletonTool instance = null;
+    private static HolderSingletonTool instance = null;
 
 
-    private InfoHolderSingletonTool()
+    private HolderSingletonTool()
     {
         mHashMap = new HashMap<String,Object>();
         mArrayList=new ArrayList<Object>();
     }
 
     //synchronized 用于线程安全，防止多线程同时创建实例
-    public synchronized static InfoHolderSingletonTool getInstance(){
+    public synchronized static HolderSingletonTool getInstance(){
         if(instance == null){
-            instance = new InfoHolderSingletonTool();
+            instance = new HolderSingletonTool();
         }
         return instance;
     }

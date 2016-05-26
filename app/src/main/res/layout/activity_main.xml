@@ -62,7 +62,7 @@
             android:layout_width="360dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:headerLayout="@layout/drawer_header"
+            app:headerLayout="@layout/left_drawer_header"
             app:menu="@menu/drawer_menu"
             />-->
 

@@ -32,7 +32,7 @@ import com.louisgeek.louiszhihuribao260_744.bean.NewsBean;
 import com.louisgeek.louiszhihuribao260_744.bean.NewsDateBean;
 import com.louisgeek.louiszhihuribao260_744.custom.LouisAppCompatActivity;
 import com.louisgeek.louiszhihuribao260_744.info.Constants;
-import com.louisgeek.louiszhihuribao260_744.tool.InfoHolderSingletonTool;
+import com.louisgeek.louiszhihuribao260_744.tool.HolderSingletonTool;
 import com.louisgeek.louiszhihuribao260_744.tool.ThemeTool;
 
 import java.util.ArrayList;
@@ -158,7 +158,7 @@ public class MainActivity extends LouisAppCompatActivity {
 
         ListView id_drawer_list = (ListView) findViewById(R.id.id_drawer_list);
 
-        View drawer_header_view = LayoutInflater.from(this).inflate(R.layout.drawer_header, null);
+        View drawer_header_view = LayoutInflater.from(this).inflate(R.layout.left_drawer_header, null);
 
         id_drawer_list.addHeaderView(drawer_header_view);
         MyBaseAdapter adapter = new MyBaseAdapter(this, classifyBeanList);
@@ -184,7 +184,7 @@ public class MainActivity extends LouisAppCompatActivity {
         mIddrawer.addDrawerListener(abdt);
 
         //================================
-        View listview_header = LayoutInflater.from(this).inflate(R.layout.listview_header, null);
+        View listview_header = LayoutInflater.from(this).inflate(R.layout.main_list_header, null);
         mSliderLayout = (SliderLayout) listview_header.findViewById(R.id.id_slider);
         initSliderLayout();
 
@@ -492,7 +492,7 @@ public class MainActivity extends LouisAppCompatActivity {
 
         //动态改变action menu 文字
         MenuItem id_item_changeTheme= menu.findItem(R.id.id_item_changeTheme);
-        String nowThemeValue= InfoHolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
+        String nowThemeValue= HolderSingletonTool.getInstance().getMapObj(Constants.INFOHOLDER_NOW_THEME_KEY).toString();
         if (nowThemeValue.equals(Constants.THEME_DEFAULT_THEMEFLAG)) {
             id_item_changeTheme.setTitle("夜间模式");
         }else if (nowThemeValue.equals(Constants.THEME_BLACK_THEMEFLAG)) {
