@@ -107,6 +107,7 @@ public class MainActivity extends LouisAppCompatActivity {
                         break;
                     case R.id.id_item_changeTheme:
                         ThemeTool.changeTheme(getApplicationContext(),idtbbar);
+                        myBaseExpandableListAdapter.notifyDataSetChanged();
                         //invalidateOptionsMenu();
                        // supportInvalidateOptionsMenu();
                         //getWindow().invalidatePanelMenu(Window.FEATURE_OPTIONS_PANEL);

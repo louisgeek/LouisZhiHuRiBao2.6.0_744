@@ -34,31 +34,33 @@
     <RelativeLayout
         android:padding="20dp"
         android:id="@+id/id_rl_title"
-       android:gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/id_iv"
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:src="@mipmap/ic_launcher"
             android:layout_height="wrap_content"/>
         <LinearLayout
             android:layout_toRightOf="@id/id_iv"
             android:orientation="vertical"
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
                 android:text="知乎日报"
-                android:textSize="30dp"
+                android:textSize="25dp"
                 android:textColor="#00ACED"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
             <TextView
                 android:text="每天三次，每次七分钟"
-                android:textSize="20dp"
+                android:textSize="14dp"
                 android:textColor="@android:color/darker_gray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

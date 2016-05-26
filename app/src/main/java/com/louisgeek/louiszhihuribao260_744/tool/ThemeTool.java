@@ -42,6 +42,8 @@ public class ThemeTool {
             //
             nowThemeValue=Constants.THEME_DEFAULT_THEMEFLAG;
         }
+
+
         //存入新的
         HolderSingletonTool.getInstance().putMapObj(Constants.INFOHOLDER_NOW_THEME_KEY,nowThemeValue);
         //保存文件

@@ -12,7 +12,7 @@
     <color name="left_list_bg_color">#fdfdfe</color>
     <color name="items_group_bg_color">#fdfdfe</color>
     <color name="items_child_bg_color">#fdfdfe</color>
-    <color name="items_child_cardview_bg_color">#c4c4c4</color>
+    <color name="items_child_cardview_bg_color">#e9e6e6</color>
     <color name="setting_bg_color">#fdfdfe</color>
     <color name="items_menu_bg_color">#fdfdfe</color>
 

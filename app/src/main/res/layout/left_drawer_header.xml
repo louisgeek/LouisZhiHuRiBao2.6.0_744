@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@android:drawable/ic_menu_share"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@android:drawable/ic_menu_camera"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,7 +75,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@android:drawable/ic_menu_add"/>
 
             <TextView
                 android:layout_width="0dp"
