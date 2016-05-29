@@ -8,7 +8,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.louisgeek.louiszhihuribao260_744.custom.LouisApplication;
+import com.louisgeek.louiszhihuribao260_744.app.LouisApplication;
 
 /**
  * Created by louisgeek on 2016/5/26.

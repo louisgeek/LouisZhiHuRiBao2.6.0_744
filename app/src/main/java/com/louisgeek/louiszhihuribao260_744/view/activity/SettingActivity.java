@@ -1,4 +1,4 @@
-package com.louisgeek.louiszhihuribao260_744.activity;
+package com.louisgeek.louiszhihuribao260_744.view.activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -11,35 +11,46 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.louisgeek.louiszhihuribao260_744.R;
-import com.louisgeek.louiszhihuribao260_744.custom.LouisAppCompatActivity;
-import com.louisgeek.louiszhihuribao260_744.custom.MyCheckBoxPreference;
-import com.louisgeek.louiszhihuribao260_744.custom.MyPreference;
+import com.louisgeek.louiszhihuribao260_744.view.common.LouisBaseAppCompatActivity;
+import com.louisgeek.louiszhihuribao260_744.view.custom.MyCheckBoxPreference;
+import com.louisgeek.louiszhihuribao260_744.view.custom.MyPreference;
 
-public class SettingActivity extends LouisAppCompatActivity {
+public class SettingActivity extends LouisBaseAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+       // setContentView(R.layout.activity_setting);
+        initToolbar();
+        configFragment();
+    }
 
+    private void configFragment() {
+        //
+        FragmentManager fragmentManager= getFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.id_fl_4_fragment, new SettingPreferenceFragement());
+        fragmentTransaction.commit();//
+    }
 
-     /*单独使用   Toolbar toolbar = (Toolbar) findViewById(R.id.id_tb_bar);
+    private void initToolbar() {
+    /*单独使用   Toolbar toolbar = (Toolbar) findViewById(R.id.id_tb_bar);
 
-        // Set an OnMenuItemClickListener to handle menu item clicks
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                // Handle the menu item
-                return true;
-            }
-        });
+       // Set an OnMenuItemClickListener to handle menu item clicks
+       toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+           @Override
+           public boolean onMenuItemClick(MenuItem item) {
+               // Handle the menu item
+               return true;
+           }
+       });
 
-        // Inflate a menu to be displayed in the toolbar
-        toolbar.inflateMenu(R.menu.toolbar_menu);*/
+       // Inflate a menu to be displayed in the toolbar
+       toolbar.inflateMenu(R.menu.toolbar_menu);*/
 
         Toolbar idtbbar = (Toolbar) findViewById(R.id.id_tb_bar);
         idtbbar.setTitle("设置");
-       // idtbbar.setPopupTheme(R.style.ToolbarPopupTheme_black);
+        // idtbbar.setPopupTheme(R.style.ToolbarPopupTheme_black);
 //        idtbbar.setSubtitle("Subtitle");
 //        idtbbar.setLogo(R.mipmap.ic_launcher);
         //  idtbhome.setNavigationIcon(R.mipmap.logo);
@@ -52,12 +63,25 @@ public class SettingActivity extends LouisAppCompatActivity {
 
         actionBar.setDisplayHomeAsUpEnabled(true);// 给左上角图标的左边加上一个返回的图标// 决定左上角图标的左侧是否有向左的小箭头, true 有小箭头，并且图标可以点击
         //actionBar.setDefaultDisplayHomeAsUpEnabled(true);
+    }
 
-        //
-        FragmentManager fragmentManager= getFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.id_fl_4_fragment, new SettingPreferenceFragement());
-        fragmentTransaction.commit();//
+    @Override
+    protected void initContentViewLayoutID() {
+        super.setLayoutID(R.layout.activity_setting);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initEventAndConfigAfterViewInited() {
 
     }
 

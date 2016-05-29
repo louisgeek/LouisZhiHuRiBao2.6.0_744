@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.louisgeek.louiszhihuribao260_744.R;
-import com.louisgeek.louiszhihuribao260_744.bean.ClassifyBean;
+import com.louisgeek.louiszhihuribao260_744.model.bean.ClassifyBean;
 
 import java.util.List;
 

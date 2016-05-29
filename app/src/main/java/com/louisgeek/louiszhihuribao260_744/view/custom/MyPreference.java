@@ -1,31 +1,30 @@
-package com.louisgeek.louiszhihuribao260_744.custom;
+package com.louisgeek.louiszhihuribao260_744.view.custom;
 
 import android.content.Context;
-import android.preference.CheckBoxPreference;
+import android.preference.Preference;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.louisgeek.louiszhihuribao260_744.R;
 import com.louisgeek.louiszhihuribao260_744.info.Constants;
 import com.louisgeek.louiszhihuribao260_744.tool.HolderSingletonTool;
+import com.louisgeek.louiszhihuribao260_744.R;
 
 /**
  * Created by louisgeek on 2016/5/24.
  */
-public class MyCheckBoxPreference extends CheckBoxPreference {
-    //public String robotoRegular = "fonts/Roboto-Regular.ttf";
-    public MyCheckBoxPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+public class MyPreference extends Preference {
+    public MyPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public MyCheckBoxPreference(Context context, AttributeSet attrs) {
+    public MyPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MyCheckBoxPreference(Context context) {
+    public MyPreference(Context context) {
         super(context);
     }
 

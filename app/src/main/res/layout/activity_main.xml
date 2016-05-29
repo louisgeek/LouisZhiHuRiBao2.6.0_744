@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    tools:context=".view.activity.MainActivity">
     <!-- 必须是android:layout_width="match_parent"
     android:layout_height="match_parent" 不然报错 -->
     <android.support.v4.widget.DrawerLayout

@@ -1,4 +1,4 @@
-package com.louisgeek.louiszhihuribao260_744.custom;
+package com.louisgeek.louiszhihuribao260_744.view.custom;
 
 import android.content.Context;
 import android.view.LayoutInflater;

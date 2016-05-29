@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/black"
     android:orientation="vertical"
-    tools:context="com.louisgeek.louiszhihuribao260_744.activity.SplashActivity">
+    tools:context=".view.activity.SplashActivity">
     <!--
     默认的scaleType是fitCenter
 

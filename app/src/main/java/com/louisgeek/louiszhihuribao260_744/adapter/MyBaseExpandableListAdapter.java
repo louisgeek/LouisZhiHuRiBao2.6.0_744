@@ -10,9 +10,9 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.louisgeek.louiszhihuribao260_744.R;
-import com.louisgeek.louiszhihuribao260_744.bean.NewsBean;
-import com.louisgeek.louiszhihuribao260_744.bean.NewsDateBean;
-import com.louisgeek.louiszhihuribao260_744.custom.LouisApplication;
+import com.louisgeek.louiszhihuribao260_744.model.bean.NewsBean;
+import com.louisgeek.louiszhihuribao260_744.model.bean.NewsDateBean;
+import com.louisgeek.louiszhihuribao260_744.app.LouisApplication;
 import com.louisgeek.louiszhihuribao260_744.info.Constants;
 import com.louisgeek.louiszhihuribao260_744.tool.HolderSingletonTool;
 import com.zhy.changeskin.SkinManager;

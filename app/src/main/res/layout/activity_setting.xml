@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/setting_bg_color"
     android:tag="skin:setting_bg_color:background"
-    tools:context=".activity.SettingActivity">
+    tools:context=".view.activity.SettingActivity">
     <!--  android:theme="@style/ToolbarTheme"-->
     <android.support.v7.widget.Toolbar
         xmlns:app="http://schemas.android.com/apk/res-auto"

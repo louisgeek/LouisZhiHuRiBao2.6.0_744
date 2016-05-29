@@ -1,4 +1,4 @@
-package com.louisgeek.louiszhihuribao260_744.activity;
+package com.louisgeek.louiszhihuribao260_744.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,25 +29,29 @@ import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.louisgeek.louiszhihuribao260_744.R;
 import com.louisgeek.louiszhihuribao260_744.adapter.MyBaseAdapter;
 import com.louisgeek.louiszhihuribao260_744.adapter.MyBaseExpandableListAdapter;
-import com.louisgeek.louiszhihuribao260_744.bean.ClassifyBean;
-import com.louisgeek.louiszhihuribao260_744.bean.NewsBean;
-import com.louisgeek.louiszhihuribao260_744.bean.NewsDateBean;
-import com.louisgeek.louiszhihuribao260_744.custom.LouisAppCompatActivity;
+import com.louisgeek.louiszhihuribao260_744.app.LouisApplication;
 import com.louisgeek.louiszhihuribao260_744.info.Constants;
+import com.louisgeek.louiszhihuribao260_744.model.bean.ClassifyBean;
+import com.louisgeek.louiszhihuribao260_744.model.bean.NewsBean;
+import com.louisgeek.louiszhihuribao260_744.model.bean.NewsDateBean;
+import com.louisgeek.louiszhihuribao260_744.presenter.IPresenterMain;
+import com.louisgeek.louiszhihuribao260_744.presenter.impl.PresenterMainImpl;
 import com.louisgeek.louiszhihuribao260_744.tool.HolderSingletonTool;
 import com.louisgeek.louiszhihuribao260_744.tool.ThemeTool;
 import com.louisgeek.louiszhihuribao260_744.util.DensityUtil;
+import com.louisgeek.louiszhihuribao260_744.view.IViewMain;
+import com.louisgeek.louiszhihuribao260_744.view.common.LouisBaseAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends LouisAppCompatActivity {
+public class MainActivity extends LouisBaseAppCompatActivity implements IViewMain{
 
-    private static final String TAG = "MainActivity";
+    //MVP  待实现  
 
     DrawerLayout mIddrawer;
-    MenuItem mTheLastSelectedMenuItem;
+    //MenuItem mTheLastSelectedMenuItem;
     SliderLayout mSliderLayout;
     Toolbar idtbbar;
     ExpandableListView expandableListView;
@@ -60,20 +64,94 @@ public class MainActivity extends LouisAppCompatActivity {
     List<NewsDateBean> newsDateList=new ArrayList<>();
     List<ClassifyBean> classifyBeanList = new ArrayList<>();
 
+    View listview_header;
+    SwipeRefreshLayout swipeRefreshLayout;
 
+    ListView id_drawer_list;
+
+    IPresenterMain mIPresenterMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //隐藏窗口写在了基类aty里 在这里报错
-        setContentView(R.layout.activity_main);
+       // setContentView(R.layout.activity_main);
+
+        mIPresenterMain =new PresenterMainImpl(this);
+
+        mIPresenterMain.doGetNewsListData(newsDateList);
+    }
+
+    private void initLeftNavigation() {
+
+       /* NavigationView idnv = (NavigationView) findViewById(R.id.id_nv);
+        idnv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                //存放点击的item 进行取消选中
+                if (mTheLastSelectedMenuItem != null) {
+                    mTheLastSelectedMenuItem.setChecked(false);
+                }
+                menuItem.setChecked(true);
+                mTheLastSelectedMenuItem = menuItem;
+                mIddrawer.closeDrawers();
+
+                //分组头不能被点击
+                switch (menuItem.getItemId()) {
+
+                    case R.id.mg:
+                        Toast.makeText(MainActivity.this, "mg", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.xl:
+                        Toast.makeText(MainActivity.this, "xl", Toast.LENGTH_SHORT).show();
+                        break;
+
+                }
+                return false;
+            }
+        });*/
 
 
 
 
-        id_ll_top_indicatorGroup = (LinearLayout) findViewById(R.id.id_ll_top_indicatorGroup);
+        View drawer_header_view = LayoutInflater.from(this).inflate(R.layout.left_drawer_header, null);
+
+        id_drawer_list.addHeaderView(drawer_header_view);
+        MyBaseAdapter adapter = new MyBaseAdapter(this, classifyBeanList);
+        adapter.setOnDingYue(new MyBaseAdapter.OnDingYue() {
+            @Override
+            public boolean dingyue(int pos) {
+                Toast.makeText(MainActivity.this, "dingyue" + pos, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+        id_drawer_list.setAdapter(adapter);
+        id_drawer_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, "onItemClick" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, mIddrawer, idtbbar, R.string.drawer_open, R.string.drawer_close);
+        abdt.syncState();
+
+
+        mIddrawer.addDrawerListener(abdt);
+    }
+
+    private void initLeftMenuListData() {
+        //===============================
+        for (int i = 0; i < 10; i++) {
+            ClassifyBean classifyBean = new ClassifyBean();
+            classifyBean.setClassifyTitle("菜单" + i);
+            classifyBean.setHasHolder(true);
+            classifyBeanList.add(classifyBean);
+        }
+    }
+
+    private void initToolbar() {
         //=================================
-        idtbbar = (Toolbar) findViewById(R.id.id_tb_bar);
         TextView idtv4bar = (TextView) findViewById(R.id.id_tv_4bar);
         idtv4bar.setVisibility(View.GONE);
 
@@ -129,74 +207,48 @@ public class MainActivity extends LouisAppCompatActivity {
                 return false;
             }
         });
+    }
 
+    @Override
+    protected void initContentViewLayoutID() {
+       super.setLayoutID(R.layout.activity_main);
+    }
+
+    @Override
+    protected void initData() {
+        initNewsListData();
+        initLeftMenuListData();
+    }
+
+    @Override
+    protected void initView() {
+
+        idtbbar = (Toolbar) findViewById(R.id.id_tb_bar);
+        //位于顶部toolbar下面的固定显示group的指示器
+        id_ll_top_indicatorGroup = (LinearLayout) findViewById(R.id.id_ll_top_indicatorGroup);
 
         mIddrawer = (DrawerLayout) findViewById(R.id.id_drawer);
-       /* NavigationView idnv = (NavigationView) findViewById(R.id.id_nv);
-        idnv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                //存放点击的item 进行取消选中
-                if (mTheLastSelectedMenuItem != null) {
-                    mTheLastSelectedMenuItem.setChecked(false);
-                }
-                menuItem.setChecked(true);
-                mTheLastSelectedMenuItem = menuItem;
-                mIddrawer.closeDrawers();
 
-                //分组头不能被点击
-                switch (menuItem.getItemId()) {
-
-                    case R.id.mg:
-                        Toast.makeText(MainActivity.this, "mg", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.xl:
-                        Toast.makeText(MainActivity.this, "xl", Toast.LENGTH_SHORT).show();
-                        break;
-
-                }
-                return false;
-            }
-        });*/
-
-
-        ListView id_drawer_list = (ListView) findViewById(R.id.id_drawer_list);
-
-        View drawer_header_view = LayoutInflater.from(this).inflate(R.layout.left_drawer_header, null);
-
-        id_drawer_list.addHeaderView(drawer_header_view);
-        MyBaseAdapter adapter = new MyBaseAdapter(this, classifyBeanList);
-        adapter.setOnDingYue(new MyBaseAdapter.OnDingYue() {
-            @Override
-            public boolean dingyue(int pos) {
-                Toast.makeText(MainActivity.this, "dingyue" + pos, Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-        id_drawer_list.setAdapter(adapter);
-        id_drawer_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, "onItemClick" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        ActionBarDrawerToggle abdt = new ActionBarDrawerToggle(this, mIddrawer, idtbbar, R.string.drawer_open, R.string.drawer_close);
-        abdt.syncState();
-
-
-        mIddrawer.addDrawerListener(abdt);
-
-        //================================
-        View listview_header = LayoutInflater.from(this).inflate(R.layout.main_list_header, null);
-        mSliderLayout = (SliderLayout) listview_header.findViewById(R.id.id_slider);
-        initSliderLayout();
-
-        //=================================
-        initData();
+        id_drawer_list = (ListView) findViewById(R.id.id_drawer_list);
 
         expandableListView = (ExpandableListView) findViewById(R.id.id_elv);
 
+         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.id_swipe_refresh);
+
+
+
+    }
+
+    @Override
+    protected void initEventAndConfigAfterViewInited() {
+        initToolbar();
+        initLeftNavigation();
+        initSliderLayout();
+        initListView();
+        initSwipeLayout();
+    }
+
+    private void initListView() {
         myBaseExpandableListAdapter = new MyBaseExpandableListAdapter(this, newsDateList);
 
         expandableListView.setAdapter(myBaseExpandableListAdapter);
@@ -208,7 +260,8 @@ public class MainActivity extends LouisAppCompatActivity {
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Toast.makeText(MainActivity.this, "childPosition" + childPosition, Toast.LENGTH_SHORT).show();
+
+                mIPresenterMain.doGoToDetail(groupPosition,childPosition);
                 return false;
             }
         });
@@ -335,28 +388,13 @@ public class MainActivity extends LouisAppCompatActivity {
                 return showHeight;
             }
         });
-
-      /*  if (listView.getChildAt(0).getTop() < 0) {
+         /*  if (listView.getChildAt(0).getTop() < 0) {
             int firstCompletelyVisiblePos = listView.getFirstVisiblePosition() + 1;
         }
 */
-
-
-        //===============================
-        for (int i = 0; i < 10; i++) {
-            ClassifyBean classifyBean = new ClassifyBean();
-            classifyBean.setClassifyTitle("菜单" + i);
-            classifyBean.setHasHolder(true);
-            classifyBeanList.add(classifyBean);
-        }
-
-
-
-        //
-        initSwipeLayout();
     }
 
-    private void initData() {
+    private void initNewsListData() {
         newsDateList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             NewsDateBean newsDate = new NewsDateBean();
@@ -376,8 +414,7 @@ public class MainActivity extends LouisAppCompatActivity {
     }
 
     private void initSwipeLayout() {
-        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.id_swipe_refresh);
-        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
+         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
         //swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
         int size = DensityUtil.dip2pxComm(this, 25);
         // 第一次进入页面的时候显示加载进度条
@@ -444,6 +481,9 @@ public class MainActivity extends LouisAppCompatActivity {
 
 
     private void initSliderLayout() {
+        listview_header = LayoutInflater.from(this).inflate(R.layout.main_list_header, null);
+        mSliderLayout = (SliderLayout) listview_header.findViewById(R.id.id_slider);
+
        /* HashMap<String,String> url_maps = new HashMap<String, String>();
         url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
         url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
@@ -542,7 +582,7 @@ public class MainActivity extends LouisAppCompatActivity {
          *//*
         mPopupWindow.showAtLocation(idtbbar, Gravity.RIGHT|Gravity.TOP,0,10);*/
 
-       menu.clear();
+        menu.clear();
 
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
 
@@ -558,6 +598,45 @@ public class MainActivity extends LouisAppCompatActivity {
         return true;
         //return super.onPrepareOptionsMenu(menu);
     }
+
+    @Override
+    public void showLoadingView() {
+        //
+    }
+
+    @Override
+    public void hideLoadingView() {
+//
+    }
+
+    @Override
+    public void showFailedError(Exception e) {
+        Toast.makeText(LouisApplication.getAppContext(), "onError Exception:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    @Override
+    public void showMyError(String error) {
+        Toast.makeText(LouisApplication.getAppContext(), "showMyError:"+error, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void goToDetail(int groupPosition,int childPosition) {
+        Toast.makeText(MainActivity.this, "childPosition" + childPosition, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void reloadData() {
+
+    }
+
+    @Override
+    public void loadMoreData() {
+
+    }
+
 
 
 
