@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
@@ -33,6 +34,7 @@ import com.louisgeek.louiszhihuribao260_744.app.LouisApplication;
 import com.louisgeek.louiszhihuribao260_744.info.Constants;
 import com.louisgeek.louiszhihuribao260_744.model.bean.ClassifyBean;
 import com.louisgeek.louiszhihuribao260_744.model.bean.NewsBean;
+import com.louisgeek.louiszhihuribao260_744.model.bean.NewsBeanFromOnLine;
 import com.louisgeek.louiszhihuribao260_744.model.bean.NewsDateBean;
 import com.louisgeek.louiszhihuribao260_744.presenter.IPresenterMain;
 import com.louisgeek.louiszhihuribao260_744.presenter.impl.PresenterMainImpl;
@@ -41,14 +43,17 @@ import com.louisgeek.louiszhihuribao260_744.tool.ThemeTool;
 import com.louisgeek.louiszhihuribao260_744.util.DensityUtil;
 import com.louisgeek.louiszhihuribao260_744.view.IViewMain;
 import com.louisgeek.louiszhihuribao260_744.view.common.LouisBaseAppCompatActivity;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+
+import okhttp3.Call;
 
 public class MainActivity extends LouisBaseAppCompatActivity implements IViewMain{
 
-    //MVP  待实现  
+    //MVP  待实现
 
     DrawerLayout mIddrawer;
     //MenuItem mTheLastSelectedMenuItem;
@@ -71,6 +76,9 @@ public class MainActivity extends LouisBaseAppCompatActivity implements IViewMai
 
     IPresenterMain mIPresenterMain;
 
+    List<NewsBeanFromOnLine.TopStoriesBean> mTopStoriesBeens;
+    List<NewsBeanFromOnLine.StoriesBean> mStoriesBeens;
+    String lastDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -216,7 +224,31 @@ public class MainActivity extends LouisBaseAppCompatActivity implements IViewMai
 
     @Override
     protected void initData() {
-        initNewsListData();
+
+        String news_latest_url="http://news-at.zhihu.com/api/4/news/latest";
+
+        OkHttpUtils.get().url(news_latest_url).build().execute(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+
+            }
+
+            @Override
+            public void onResponse(String response) {
+                NewsBeanFromOnLine newsBeanFromOnLine=JSON.parseObject(response, NewsBeanFromOnLine.class);
+                Log.d("xxx","qq:"+newsBeanFromOnLine);
+                mTopStoriesBeens=new ArrayList<NewsBeanFromOnLine.TopStoriesBean>(newsBeanFromOnLine.getTop_stories());
+                mStoriesBeens=new ArrayList<NewsBeanFromOnLine.StoriesBean>(newsBeanFromOnLine.getStories());
+                lastDate=newsBeanFromOnLine.getDate();
+                initNewsListData();
+                initSliderLayout();
+                initListView();
+            }
+        });
+
+
+
+    //## initNewsListData();
         initLeftMenuListData();
     }
 
@@ -243,8 +275,8 @@ public class MainActivity extends LouisBaseAppCompatActivity implements IViewMai
     protected void initEventAndConfigAfterViewInited() {
         initToolbar();
         initLeftNavigation();
-        initSliderLayout();
-        initListView();
+        //##initSliderLayout();
+        //## initListView();
         initSwipeLayout();
     }
 
@@ -396,14 +428,14 @@ public class MainActivity extends LouisBaseAppCompatActivity implements IViewMai
 
     private void initNewsListData() {
         newsDateList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             NewsDateBean newsDate = new NewsDateBean();
-            newsDate.setDateStr("1992-06-2"+i+" 星期" + i);
+            newsDate.setDateStr(lastDate);
 
             List<NewsBean> newsBeanList = new ArrayList<>();
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < mStoriesBeens.size(); j++) {
                 NewsBean newsBean = new NewsBean();
-                newsBean.setTitle(i + "标题" + j);
+                newsBean.setTitle(mStoriesBeens.get(j).getTitle());
                 newsBean.setContent(i + "内容" + j);
                 newsBeanList.add(newsBean);
             }
@@ -490,17 +522,19 @@ public class MainActivity extends LouisBaseAppCompatActivity implements IViewMai
         url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
         url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
 */
-        HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
+       /* HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
         file_maps.put("Hannibal", R.mipmap.ic_launcher);
         file_maps.put("Big Bang Theory", R.mipmap.logo);
-        file_maps.put("House of Cards", R.mipmap.ic_launcher);
+        file_maps.put("House of Cards", R.mipmap.ic_launcher);*/
 
-        for (String name : file_maps.keySet()) {
+      //  for (String name : file_maps.keySet()) {
+        for (int i=0;i<mTopStoriesBeens.size();i++){
+           NewsBeanFromOnLine.TopStoriesBean topStoriesBeen=mTopStoriesBeens.get(i);
             TextSliderView textSliderView = new TextSliderView(this);
             // initialize a SliderLayout
             textSliderView
-                    .description(name)
-                    .image(file_maps.get(name))
+                    .description(topStoriesBeen.getTitle())
+                    .image(topStoriesBeen.getImage())
                     .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
                         @Override
@@ -512,7 +546,7 @@ public class MainActivity extends LouisBaseAppCompatActivity implements IViewMai
             //add your extra information
             textSliderView.bundle(new Bundle());
             textSliderView.getBundle()
-                    .putString("extra", name);
+                    .putString("extra", topStoriesBeen.getTitle());
 
             mSliderLayout.addSlider(textSliderView);
         }

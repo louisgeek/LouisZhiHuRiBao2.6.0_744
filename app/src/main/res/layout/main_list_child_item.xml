@@ -23,7 +23,7 @@
                                         xmlns:android="http://schemas.android.com/apk/res/android"
                                         xmlns:app="http://schemas.android.com/apk/res-auto"
                                         android:layout_width="match_parent"
-                                        android:layout_height="80dp"
+                                        android:layout_height="100dp"
                                         app:cardCornerRadius="15dp"
                                         app:cardElevation="10dp"
                                         app:contentPadding="10dp"
@@ -42,10 +42,10 @@
             -->
             <TextView
                 android:id="@+id/title"
-                android:layout_width="wrap_content"
+                android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:text="child"
-                android:textSize="22dp"
+                android:textSize="20dp"
                android:textColor="@color/items_child_text_color"
                 android:tag="skin:items_child_text_color:textColor"
                 />
@@ -64,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/title"
                 android:src="@mipmap/ic_launcher"
                 />
         </RelativeLayout>
